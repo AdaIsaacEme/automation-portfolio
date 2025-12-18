@@ -1212,7 +1212,10 @@
               JSON Mapping
             </div>
             <div class="tool-item">
-              <img src="../images/Automation/fastapi_python_logo.png" alt="FastAPI" />
+              <img
+                src="../images/Automation/fastapi_python_logo.png"
+                alt="FastAPI"
+              />
               FastAPI
             </div>
             <div class="tool-item">
@@ -1224,7 +1227,10 @@
               OpenAI API
             </div>
             <div class="tool-item">
-              <img src="../images/Automation/pinecone-logo.png" alt="Pinecone" />
+              <img
+                src="../images/Automation/pinecone-logo.png"
+                alt="Pinecone"
+              />
               Pinecone
             </div>
             <div class="tool-item">
@@ -1324,123 +1330,591 @@
 
           <div class="project-grid">
             <!-- FLAGSHIP PROJECT 01: Custom AI Sales Qualification Engine -->
-            <div class="project-card" style="background: #ffffff; border: 3px solid #af4c0f; margin-bottom: 40px; box-shadow: 0 8px 30px rgba(0,0,0,0.2);">
-              <div style="text-align: center; padding: 20px 30px; background: #af4c0f; color: white; border-radius: 10px 10px 0 0;">
-                <div style="font-size: 0.85em; font-weight: bold; letter-spacing: 1.5px; margin-bottom: 10px; text-transform: uppercase;">FLAGSHIP AI AUTOMATION PROJECT</div>
-              </div>
-              <div class="project-header" style="background: transparent; border-bottom: 3px solid #af4c0f; padding: 20px 30px 15px 30px;">
-                <h3 style="font-size: 1.9em; line-height: 1.3; color: #2c2416; margin: 0;">Custom AI Sales Qualification Engine (RAG + CRM Automation)</h3>
-              </div>
-              <div class="project-content" style="padding: 30px; color: #2c2416;">
-                <div style="background: #fff3cd; border: 3px solid #af4c0f; padding: 18px 25px; border-radius: 8px; margin-bottom: 25px; text-align: center;">
-                  <p style="margin: 0; font-weight: 900; color: #2c2416; font-size: 1.1em; letter-spacing: 0.5px;"><strong>Disclaimer: Images can be clicked to open a zoomed view, allowing you to see all actions and interactions clearly.</strong></p>
+            <div
+              class="project-card"
+              style="
+                background: #ffffff;
+                border: 3px solid #af4c0f;
+                margin-bottom: 40px;
+                box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+              "
+            >
+              <div
+                style="
+                  text-align: center;
+                  padding: 20px 30px;
+                  background: #af4c0f;
+                  color: white;
+                  border-radius: 10px 10px 0 0;
+                "
+              >
+                <div
+                  style="
+                    font-size: 0.85em;
+                    font-weight: bold;
+                    letter-spacing: 1.5px;
+                    margin-bottom: 10px;
+                    text-transform: uppercase;
+                  "
+                >
+                  FLAGSHIP AI AUTOMATION PROJECT
                 </div>
-                <h4 style="color: #af4c0f; font-size: 1.4em; margin-bottom: 15px; font-weight: bold;">The Problem</h4>
-                <p style="margin-bottom: 20px; line-height: 1.8; color: #333; font-size: 1.05em;">
-                  Businesses using CRMs like GoHighLevel struggle with rigid chatbot logic that breaks during natural conversations, lost leads due to incomplete qualification, no persistent memory across messages, AI hallucinations without business-specific knowledge, and inability to scale intelligent conversations across WhatsApp, Instagram, and web chat. Traditional low-code automation tools hit a ceiling when it comes to sophisticated decision-making and multi-step reasoning.
-                </p>
-
-                <h4 style="color: #af4c0f; font-size: 1.4em; margin-bottom: 15px; font-weight: bold; margin-top: 25px;">The Solution</h4>
-                <p style="margin-bottom: 20px; line-height: 1.8; color: #333; font-size: 1.05em;">
-                  I built a production-ready AI microservice that moves complex reasoning outside the CRM, enabling natural conversations with persistent memory and business-aware intelligence. Here's the technical architecture:
-                </p>
-                <ul style="margin-bottom: 20px; margin-left: 20px; line-height: 1.9; color: #333; font-size: 1em;">
-                  <li style="margin-bottom: 10px;"><strong style="color: #2c2416;">GoHighLevel</strong> serves as the front-end orchestration layer, managing user interactions and contact lifecycle</li>
-                  <li style="margin-bottom: 10px;"><strong style="color: #2c2416;">Custom webhooks</strong> send messages to an external AI service, decoupling CRM from AI logic</li>
-                  <li style="margin-bottom: 10px;"><strong style="color: #2c2416;">FastAPI (Python)</strong> backend hosted on Vercel processes: lead intent detection, qualification state, memory retrieval, and context evaluation</li>
-                  <li style="margin-bottom: 10px;"><strong style="color: #2c2416;">OpenAI API</strong> (GPT + embeddings) handles reasoning, response generation, and contextual understanding</li>
-                  <li style="margin-bottom: 10px;"><strong style="color: #2c2416;">Pinecone vector database</strong> implements RAG (Retrieval-Augmented Generation) storing vectorized FAQ, product features, and business policies for accurate, grounded responses</li>
-                  <li style="margin-bottom: 10px;"><strong style="color: #2c2416;">Redis (Upstash)</strong> stores persistent session memory across multiple days: contact name, email, phone, interests, postcode, and qualification state—enabling the AI to recall past conversation context</li>
-                  <li style="margin-bottom: 10px;"><strong style="color: #2c2416;">Automatic CRM integration</strong> triggers workflows when qualification is complete, updating pipelines and creating tasks</li>
-                </ul>
-                <p style="margin-bottom: 20px; line-height: 1.8; color: #333; font-size: 1.05em;">
-                  <strong style="color: #2c2416;">Multi-channel deployment:</strong> The same AI logic powers WhatsApp, Instagram DMs, and website chat—providing consistent, intelligent responses everywhere customers engage.
-                </p>
-
-                <h4 style="color: #af4c0f; font-size: 1.4em; margin-bottom: 20px; font-weight: bold; margin-top: 25px;">Tech Stack</h4>
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 20px; margin-bottom: 30px; padding: 25px; background: #f9f7f5; border-radius: 8px; border: 1px solid #e8e4df;">
-                  <div style="text-align: center; display: flex; flex-direction: column; align-items: center;">
-                    <img src="../images/Automation/ghl logo.png" alt="GoHighLevel" style="width: 90px; height: 90px; object-fit: contain; margin-bottom: 10px;" />
-                    <strong style="color: #2c2416; font-size: 0.95em;">GoHighLevel</strong>
-                    <p style="font-size: 0.85em; color: #666; margin-top: 5px;">CRM Orchestration</p>
-                  </div>
-                  <div style="text-align: center; display: flex; flex-direction: column; align-items: center;">
-                    <img src="../images/Automation/fastapi_python_logo.png" alt="FastAPI + Python" style="width: 90px; height: 90px; object-fit: contain; margin-bottom: 10px;" />
-                    <strong style="color: #2c2416; font-size: 0.95em;">FastAPI</strong>
-                    <p style="font-size: 0.85em; color: #666; margin-top: 5px;">Backend Service</p>
-                  </div>
-                  <div style="text-align: center; display: flex; flex-direction: column; align-items: center;">
-                    <img src="../images/Automation/vercel_logo.png" alt="Vercel" style="width: 90px; height: 90px; object-fit: contain; margin-bottom: 10px;" />
-                    <strong style="color: #2c2416; font-size: 0.95em;">Vercel</strong>
-                    <p style="font-size: 0.85em; color: #666; margin-top: 5px;">Serverless Hosting</p>
-                  </div>
-                  <div style="text-align: center; display: flex; flex-direction: column; align-items: center;">
-                    <img src="../images/Automation/openapi_logo.png" alt="OpenAI API" style="width: 90px; height: 90px; object-fit: contain; margin-bottom: 10px;" />
-                    <strong style="color: #2c2416; font-size: 0.95em;">OpenAI</strong>
-                    <p style="font-size: 0.85em; color: #666; margin-top: 5px;">LLM & Embeddings</p>
-                  </div>
-                  <div style="text-align: center; display: flex; flex-direction: column; align-items: center;">
-                    <img src="../images/Automation/pinecone-logo.png" alt="Pinecone" style="width: 90px; height: 90px; object-fit: contain; margin-bottom: 10px;" />
-                    <strong style="color: #2c2416; font-size: 0.95em;">Pinecone</strong>
-                    <p style="font-size: 0.85em; color: #666; margin-top: 5px;">Vector DB (RAG)</p>
-                  </div>
-                  <div style="text-align: center; display: flex; flex-direction: column; align-items: center;">
-                    <img src="../images/Automation/redis_logo.png" alt="Redis" style="width: 90px; height: 90px; object-fit: contain; margin-bottom: 10px;" />
-                    <strong style="color: #2c2416; font-size: 0.95em;">Redis</strong>
-                    <p style="font-size: 0.85em; color: #666; margin-top: 5px;">Persistent Memory</p>
-                  </div>
-                  <div style="text-align: center; display: flex; flex-direction: column; align-items: center;">
-                    <img src="../images/Automation/webhooks logo.png" alt="Webhooks" style="width: 90px; height: 90px; object-fit: contain; margin-bottom: 10px;" />
-                    <strong style="color: #2c2416; font-size: 0.95em;">Webhooks</strong>
-                    <p style="font-size: 0.85em; color: #666; margin-top: 5px;">API Integrations</p>
-                  </div>
-                </div>
-
-                <h4 style="color: #af4c0f; font-size: 1.4em; margin-bottom: 15px; font-weight: bold; margin-top: 25px;">Why This Project Matters</h4>
-                <ul style="margin-bottom: 25px; margin-left: 20px; line-height: 1.9; color: #333; font-size: 1em;">
-                  <li style="margin-bottom: 10px;"><strong style="color: #2c2416;">High-code AI automation</strong> goes beyond low-code tool limitations</li>
-                  <li style="margin-bottom: 10px;"><strong style="color: #2c2416;">CRM workaround:</strong> Solves GoHighLevel's constraint by moving intelligence to external service</li>
-                  <li style="margin-bottom: 10px;"><strong style="color: #2c2416;">Persistent memory:</strong> Conversations with context, not stateless interactions</li>
-                  <li style="margin-bottom: 10px;"><strong style="color: #2c2416;">Production-ready:</strong> Designed for scale, reliability, and business logic accuracy</li>
-                  <li style="margin-bottom: 10px;"><strong style="color: #2c2416;">Multi-channel:</strong> Deploys across WhatsApp, Instagram, web—unified AI experience</li>
-                  <li style="margin-bottom: 10px;"><strong style="color: #2c2416;">RAG implementation:</strong> Grounded AI responses using real business data, reducing hallucinations</li>
-                </ul>
               </div>
-
-              <!-- Video Demo Section -->
-              <div style="padding: 60px 0; background: linear-gradient(135deg, #f9f7f5 0%, #fefdfb 100%); border-top: 2px solid #f0ebe5; border-bottom: 2px solid #f0ebe5; margin-bottom: 0;">
-                <div style="padding: 0 30px;">
-                  <h3 style="color: #2c2416; font-size: 1.8em; margin-bottom: 20px; text-align: center; font-weight: bold;">Website Integration Demo (Mock Data)</h3>
-                  
-                  <p style="margin-bottom: 30px; line-height: 1.8; color: #333; font-size: 1.05em; text-align: center; max-width: 900px; margin-left: auto; margin-right: auto;">
-                    This video demonstrates how the AI qualification engine integrates with a live website form and messaging flow. All data shown is mock data used strictly for demonstration purposes.
+              <div
+                class="project-header"
+                style="
+                  background: transparent;
+                  border-bottom: 3px solid #af4c0f;
+                  padding: 20px 30px 15px 30px;
+                "
+              >
+                <h3
+                  style="
+                    font-size: 1.9em;
+                    line-height: 1.3;
+                    color: #2c2416;
+                    margin: 0;
+                  "
+                >
+                  Custom AI Sales Qualification Engine (RAG + CRM Automation)
+                </h3>
+              </div>
+              <div
+                class="project-content"
+                style="padding: 30px; color: #2c2416"
+              >
+                <div
+                  style="
+                    background: #fff3cd;
+                    border: 3px solid #af4c0f;
+                    padding: 18px 25px;
+                    border-radius: 8px;
+                    margin-bottom: 25px;
+                    text-align: center;
+                  "
+                >
+                  <p
+                    style="
+                      margin: 0;
+                      font-weight: 900;
+                      color: #2c2416;
+                      font-size: 1.1em;
+                      letter-spacing: 0.5px;
+                    "
+                  >
+                    <strong
+                      >Disclaimer: Images can be clicked to open a zoomed view,
+                      allowing you to see all actions and interactions
+                      clearly.</strong
+                    >
                   </p>
+                </div>
+                <h4
+                  style="
+                    color: #af4c0f;
+                    font-size: 1.4em;
+                    margin-bottom: 15px;
+                    font-weight: bold;
+                  "
+                >
+                  The Problem
+                </h4>
+                <p
+                  style="
+                    margin-bottom: 20px;
+                    line-height: 1.8;
+                    color: #333;
+                    font-size: 1.05em;
+                  "
+                >
+                  Businesses using CRMs like GoHighLevel struggle with rigid
+                  chatbot logic that breaks during natural conversations, lost
+                  leads due to incomplete qualification, no persistent memory
+                  across messages, AI hallucinations without business-specific
+                  knowledge, and inability to scale intelligent conversations
+                  across WhatsApp, Instagram, and web chat. Traditional low-code
+                  automation tools hit a ceiling when it comes to sophisticated
+                  decision-making and multi-step reasoning.
+                </p>
 
-                  <div style="background: #fffbf0; border-left: 4px solid #af4c0f; padding: 18px 22px; margin-bottom: 40px; border-radius: 6px; max-width: 900px; margin-left: auto; margin-right: auto; display: flex; gap: 15px; align-items: flex-start;">
-                    <svg style="width: 24px; height: 24px; color: #af4c0f; flex-shrink: 0; margin-top: 2px;" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                      <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
-                    </svg>
-                    <p style="margin: 0; font-weight: 700; color: #2c2416; font-size: 0.95em; line-height: 1.6;">
-                      <strong>Disclaimer:</strong> All names, phone numbers, emails, postcodes, and conversations shown in this demo are mock data created for demonstration purposes only. No real client or user data is displayed.
+                <h4
+                  style="
+                    color: #af4c0f;
+                    font-size: 1.4em;
+                    margin-bottom: 15px;
+                    font-weight: bold;
+                    margin-top: 25px;
+                  "
+                >
+                  The Solution
+                </h4>
+                <p
+                  style="
+                    margin-bottom: 20px;
+                    line-height: 1.8;
+                    color: #333;
+                    font-size: 1.05em;
+                  "
+                >
+                  I built a production-ready AI microservice that moves complex
+                  reasoning outside the CRM, enabling natural conversations with
+                  persistent memory and business-aware intelligence. Here's the
+                  technical architecture:
+                </p>
+                <ul
+                  style="
+                    margin-bottom: 20px;
+                    margin-left: 20px;
+                    line-height: 1.9;
+                    color: #333;
+                    font-size: 1em;
+                  "
+                >
+                  <li style="margin-bottom: 10px">
+                    <strong style="color: #2c2416">GoHighLevel</strong> serves
+                    as the front-end orchestration layer, managing user
+                    interactions and contact lifecycle
+                  </li>
+                  <li style="margin-bottom: 10px">
+                    <strong style="color: #2c2416">Custom webhooks</strong> send
+                    messages to an external AI service, decoupling CRM from AI
+                    logic
+                  </li>
+                  <li style="margin-bottom: 10px">
+                    <strong style="color: #2c2416">FastAPI (Python)</strong>
+                    backend hosted on Vercel processes: lead intent detection,
+                    qualification state, memory retrieval, and context
+                    evaluation
+                  </li>
+                  <li style="margin-bottom: 10px">
+                    <strong style="color: #2c2416">OpenAI API</strong> (GPT +
+                    embeddings) handles reasoning, response generation, and
+                    contextual understanding
+                  </li>
+                  <li style="margin-bottom: 10px">
+                    <strong style="color: #2c2416"
+                      >Pinecone vector database</strong
+                    >
+                    implements RAG (Retrieval-Augmented Generation) storing
+                    vectorized FAQ, product features, and business policies for
+                    accurate, grounded responses
+                  </li>
+                  <li style="margin-bottom: 10px">
+                    <strong style="color: #2c2416">Redis (Upstash)</strong>
+                    stores persistent session memory across multiple days:
+                    contact name, email, phone, interests, postcode, and
+                    qualification state—enabling the AI to recall past
+                    conversation context
+                  </li>
+                  <li style="margin-bottom: 10px">
+                    <strong style="color: #2c2416"
+                      >Automatic CRM integration</strong
+                    >
+                    triggers workflows when qualification is complete, updating
+                    pipelines and creating tasks
+                  </li>
+                </ul>
+                <p
+                  style="
+                    margin-bottom: 20px;
+                    line-height: 1.8;
+                    color: #333;
+                    font-size: 1.05em;
+                  "
+                >
+                  <strong style="color: #2c2416"
+                    >Multi-channel deployment:</strong
+                  >
+                  The same AI logic powers WhatsApp, Instagram DMs, and website
+                  chat—providing consistent, intelligent responses everywhere
+                  customers engage.
+                </p>
+
+                <h4
+                  style="
+                    color: #af4c0f;
+                    font-size: 1.4em;
+                    margin-bottom: 20px;
+                    font-weight: bold;
+                    margin-top: 25px;
+                  "
+                >
+                  Tech Stack
+                </h4>
+                <div
+                  style="
+                    display: grid;
+                    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+                    gap: 20px;
+                    margin-bottom: 30px;
+                    padding: 25px;
+                    background: #f9f7f5;
+                    border-radius: 8px;
+                    border: 1px solid #e8e4df;
+                  "
+                >
+                  <div
+                    style="
+                      text-align: center;
+                      display: flex;
+                      flex-direction: column;
+                      align-items: center;
+                    "
+                  >
+                    <img
+                      src="../images/Automation/ghl logo.png"
+                      alt="GoHighLevel"
+                      style="
+                        width: 90px;
+                        height: 90px;
+                        object-fit: contain;
+                        margin-bottom: 10px;
+                      "
+                    />
+                    <strong style="color: #2c2416; font-size: 0.95em"
+                      >GoHighLevel</strong
+                    >
+                    <p style="font-size: 0.85em; color: #666; margin-top: 5px">
+                      CRM Orchestration
+                    </p>
+                  </div>
+                  <div
+                    style="
+                      text-align: center;
+                      display: flex;
+                      flex-direction: column;
+                      align-items: center;
+                    "
+                  >
+                    <img
+                      src="../images/Automation/fastapi_python_logo.png"
+                      alt="FastAPI + Python"
+                      style="
+                        width: 90px;
+                        height: 90px;
+                        object-fit: contain;
+                        margin-bottom: 10px;
+                      "
+                    />
+                    <strong style="color: #2c2416; font-size: 0.95em"
+                      >FastAPI</strong
+                    >
+                    <p style="font-size: 0.85em; color: #666; margin-top: 5px">
+                      Backend Service
+                    </p>
+                  </div>
+                  <div
+                    style="
+                      text-align: center;
+                      display: flex;
+                      flex-direction: column;
+                      align-items: center;
+                    "
+                  >
+                    <img
+                      src="../images/Automation/vercel_logo.png"
+                      alt="Vercel"
+                      style="
+                        width: 90px;
+                        height: 90px;
+                        object-fit: contain;
+                        margin-bottom: 10px;
+                      "
+                    />
+                    <strong style="color: #2c2416; font-size: 0.95em"
+                      >Vercel</strong
+                    >
+                    <p style="font-size: 0.85em; color: #666; margin-top: 5px">
+                      Serverless Hosting
+                    </p>
+                  </div>
+                  <div
+                    style="
+                      text-align: center;
+                      display: flex;
+                      flex-direction: column;
+                      align-items: center;
+                    "
+                  >
+                    <img
+                      src="../images/Automation/openapi_logo.png"
+                      alt="OpenAI API"
+                      style="
+                        width: 90px;
+                        height: 90px;
+                        object-fit: contain;
+                        margin-bottom: 10px;
+                      "
+                    />
+                    <strong style="color: #2c2416; font-size: 0.95em"
+                      >OpenAI</strong
+                    >
+                    <p style="font-size: 0.85em; color: #666; margin-top: 5px">
+                      LLM & Embeddings
+                    </p>
+                  </div>
+                  <div
+                    style="
+                      text-align: center;
+                      display: flex;
+                      flex-direction: column;
+                      align-items: center;
+                    "
+                  >
+                    <img
+                      src="../images/Automation/pinecone-logo.png"
+                      alt="Pinecone"
+                      style="
+                        width: 90px;
+                        height: 90px;
+                        object-fit: contain;
+                        margin-bottom: 10px;
+                      "
+                    />
+                    <strong style="color: #2c2416; font-size: 0.95em"
+                      >Pinecone</strong
+                    >
+                    <p style="font-size: 0.85em; color: #666; margin-top: 5px">
+                      Vector DB (RAG)
+                    </p>
+                  </div>
+                  <div
+                    style="
+                      text-align: center;
+                      display: flex;
+                      flex-direction: column;
+                      align-items: center;
+                    "
+                  >
+                    <img
+                      src="../images/Automation/redis_logo.png"
+                      alt="Redis"
+                      style="
+                        width: 90px;
+                        height: 90px;
+                        object-fit: contain;
+                        margin-bottom: 10px;
+                      "
+                    />
+                    <strong style="color: #2c2416; font-size: 0.95em"
+                      >Redis</strong
+                    >
+                    <p style="font-size: 0.85em; color: #666; margin-top: 5px">
+                      Persistent Memory
+                    </p>
+                  </div>
+                  <div
+                    style="
+                      text-align: center;
+                      display: flex;
+                      flex-direction: column;
+                      align-items: center;
+                    "
+                  >
+                    <img
+                      src="../images/Automation/webhooks logo.png"
+                      alt="Webhooks"
+                      style="
+                        width: 90px;
+                        height: 90px;
+                        object-fit: contain;
+                        margin-bottom: 10px;
+                      "
+                    />
+                    <strong style="color: #2c2416; font-size: 0.95em"
+                      >Webhooks</strong
+                    >
+                    <p style="font-size: 0.85em; color: #666; margin-top: 5px">
+                      API Integrations
                     </p>
                   </div>
                 </div>
 
-                <div style="width: 100%; background: white; overflow: hidden; box-shadow: 0 15px 45px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;">
-                  <div style="position: relative; width: 100%; padding-bottom: 56.25%; background: #000; overflow: hidden;">
-                    <video 
-                      id="demoVideo" 
-                      style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain;"
+                <h4
+                  style="
+                    color: #af4c0f;
+                    font-size: 1.4em;
+                    margin-bottom: 15px;
+                    font-weight: bold;
+                    margin-top: 25px;
+                  "
+                >
+                  Why This Project Matters
+                </h4>
+                <ul
+                  style="
+                    margin-bottom: 25px;
+                    margin-left: 20px;
+                    line-height: 1.9;
+                    color: #333;
+                    font-size: 1em;
+                  "
+                >
+                  <li style="margin-bottom: 10px">
+                    <strong style="color: #2c2416"
+                      >High-code AI automation</strong
+                    >
+                    goes beyond low-code tool limitations
+                  </li>
+                  <li style="margin-bottom: 10px">
+                    <strong style="color: #2c2416">CRM workaround:</strong>
+                    Solves GoHighLevel's constraint by moving intelligence to
+                    external service
+                  </li>
+                  <li style="margin-bottom: 10px">
+                    <strong style="color: #2c2416">Persistent memory:</strong>
+                    Conversations with context, not stateless interactions
+                  </li>
+                  <li style="margin-bottom: 10px">
+                    <strong style="color: #2c2416">Production-ready:</strong>
+                    Designed for scale, reliability, and business logic accuracy
+                  </li>
+                  <li style="margin-bottom: 10px">
+                    <strong style="color: #2c2416">Multi-channel:</strong>
+                    Deploys across WhatsApp, Instagram, web—unified AI
+                    experience
+                  </li>
+                  <li style="margin-bottom: 10px">
+                    <strong style="color: #2c2416">RAG implementation:</strong>
+                    Grounded AI responses using real business data, reducing
+                    hallucinations
+                  </li>
+                </ul>
+              </div>
+
+              <!-- Video Demo Section -->
+              <div
+                style="
+                  padding: 60px 0;
+                  background: linear-gradient(135deg, #f9f7f5 0%, #fefdfb 100%);
+                  border-top: 2px solid #f0ebe5;
+                  border-bottom: 2px solid #f0ebe5;
+                  margin-bottom: 0;
+                "
+              >
+                <div style="padding: 0 30px">
+                  <h3
+                    style="
+                      color: #2c2416;
+                      font-size: 1.8em;
+                      margin-bottom: 20px;
+                      text-align: center;
+                      font-weight: bold;
+                    "
+                  >
+                    Website Integration Demo (Mock Data)
+                  </h3>
+
+                  <p
+                    style="
+                      margin-bottom: 30px;
+                      line-height: 1.8;
+                      color: #333;
+                      font-size: 1.05em;
+                      text-align: center;
+                      max-width: 900px;
+                      margin-left: auto;
+                      margin-right: auto;
+                    "
+                  >
+                    This video demonstrates how the AI qualification engine
+                    integrates with a live website form and messaging flow. All
+                    data shown is mock data used strictly for demonstration
+                    purposes.
+                  </p>
+
+                  <div
+                    style="
+                      background: #fffbf0;
+                      border-left: 4px solid #af4c0f;
+                      padding: 18px 22px;
+                      margin-bottom: 40px;
+                      border-radius: 6px;
+                      max-width: 900px;
+                      margin-left: auto;
+                      margin-right: auto;
+                      display: flex;
+                      gap: 15px;
+                      align-items: flex-start;
+                    "
+                  >
+                    <svg
+                      style="
+                        width: 24px;
+                        height: 24px;
+                        color: #af4c0f;
+                        flex-shrink: 0;
+                        margin-top: 2px;
+                      "
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                        clip-rule="evenodd"
+                      ></path>
+                    </svg>
+                    <p
+                      style="
+                        margin: 0;
+                        font-weight: 700;
+                        color: #2c2416;
+                        font-size: 0.95em;
+                        line-height: 1.6;
+                      "
+                    >
+                      <strong>Disclaimer:</strong> All names, phone numbers,
+                      emails, postcodes, and conversations shown in this demo
+                      are mock data created for demonstration purposes only. No
+                      real client or user data is displayed.
+                    </p>
+                  </div>
+                </div>
+
+                <div
+                  style="
+                    width: 100%;
+                    background: white;
+                    overflow: hidden;
+                    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.15);
+                    transition: all 0.3s ease;
+                  "
+                >
+                  <div
+                    style="
+                      position: relative;
+                      width: 100%;
+                      padding-bottom: 56.25%;
+                      background: #000;
+                      overflow: hidden;
+                    "
+                  >
+                    <video
+                      id="demoVideo"
+                      style="
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        object-fit: contain;
+                      "
                       controls
                       autoplay
                       muted
                       aria-label="Website integration demo video showing AI qualification engine with mock data"
                     >
-                      <source src="../images/Website_integration.mp4" type="video/mp4">
-                      Your browser does not support the video tag. Please update your browser or use a different device to view this demo.
+                      <source
+                        src="../images/Website_integration.mp4"
+                        type="video/mp4"
+                      />
+                      Your browser does not support the video tag. Please update
+                      your browser or use a different device to view this demo.
                     </video>
-                    <button 
-                      id="playBtn" 
+                    <button
+                      id="playBtn"
                       style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(175, 76, 15, 0.9); color: white; border: none; width: 100px; height: 100px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 50px; z-index: 10; transition: all 0.3s ease; hover:background: rgba(175, 76, 15, 1);"
                       aria-label="Play video"
                     >
@@ -1450,75 +1924,262 @@
                 </div>
               </div>
 
-              <div class="project-images" style="padding: 50px 0; background: white; border-top: 2px solid #f0ebe5;">
-                <div style="margin-bottom: 60px; max-width: 100%; margin-left: auto; margin-right: auto;">
+              <div
+                class="project-images"
+                style="
+                  padding: 50px 0;
+                  background: white;
+                  border-top: 2px solid #f0ebe5;
+                "
+              >
+                <div
+                  style="
+                    margin-bottom: 60px;
+                    max-width: 100%;
+                    margin-left: auto;
+                    margin-right: auto;
+                  "
+                >
                   <img
                     src="../images/Automation/GHL_AI FULL SETUP.png"
                     alt="GoHighLevel workflow orchestration triggering the AI system"
                     class="project-image"
-                    style="width: 95%; margin: 0 auto 20px auto; display: block; border-radius: 12px; box-shadow: 0 8px 20px rgba(0,0,0,0.25);"
+                    style="
+                      width: 95%;
+                      margin: 0 auto 20px auto;
+                      display: block;
+                      border-radius: 12px;
+                      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+                    "
                   />
-                  <p style="text-align: center; font-size: 1.1em; color: #333; margin: 0 auto; font-style: italic; max-width: 95%; padding: 0 20px;">GoHighLevel workflow orchestration triggering the AI system</p>
+                  <p
+                    style="
+                      text-align: center;
+                      font-size: 1.1em;
+                      color: #333;
+                      margin: 0 auto;
+                      font-style: italic;
+                      max-width: 95%;
+                      padding: 0 20px;
+                    "
+                  >
+                    GoHighLevel workflow orchestration triggering the AI system
+                  </p>
                 </div>
 
-                <div style="margin-bottom: 60px; max-width: 100%; margin-left: auto; margin-right: auto;">
+                <div
+                  style="
+                    margin-bottom: 60px;
+                    max-width: 100%;
+                    margin-left: auto;
+                    margin-right: auto;
+                  "
+                >
                   <img
                     src="../images/Automation/GHL_AI AGENT SETUP.png"
                     alt="Custom webhook connecting GoHighLevel to the AI microservice"
                     class="project-image"
-                    style="width: 95%; margin: 0 auto 20px auto; display: block; border-radius: 12px; box-shadow: 0 8px 20px rgba(0,0,0,0.25);"
+                    style="
+                      width: 95%;
+                      margin: 0 auto 20px auto;
+                      display: block;
+                      border-radius: 12px;
+                      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+                    "
                   />
-                  <p style="text-align: center; font-size: 1.1em; color: #333; margin: 0 auto; font-style: italic; max-width: 95%; padding: 0 20px;">Custom webhook connecting GoHighLevel to the AI microservice</p>
+                  <p
+                    style="
+                      text-align: center;
+                      font-size: 1.1em;
+                      color: #333;
+                      margin: 0 auto;
+                      font-style: italic;
+                      max-width: 95%;
+                      padding: 0 20px;
+                    "
+                  >
+                    Custom webhook connecting GoHighLevel to the AI microservice
+                  </p>
                 </div>
 
-                <div style="margin-bottom: 60px; max-width: 100%; margin-left: auto; margin-right: auto;">
+                <div
+                  style="
+                    margin-bottom: 60px;
+                    max-width: 100%;
+                    margin-left: auto;
+                    margin-right: auto;
+                  "
+                >
                   <img
                     src="../images/Automation/vercel info showing response and redis data retrieval.png"
                     alt="Vercel execution logs showing OpenAI responses and Redis memory writes"
                     class="project-image"
-                    style="width: 95%; margin: 0 auto 20px auto; display: block; border-radius: 12px; box-shadow: 0 8px 20px rgba(0,0,0,0.25);"
+                    style="
+                      width: 95%;
+                      margin: 0 auto 20px auto;
+                      display: block;
+                      border-radius: 12px;
+                      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+                    "
                   />
-                  <p style="text-align: center; font-size: 1.1em; color: #333; margin: 0 auto; font-style: italic; max-width: 95%; padding: 0 20px;">Vercel execution logs showing OpenAI responses and Redis memory writes</p>
+                  <p
+                    style="
+                      text-align: center;
+                      font-size: 1.1em;
+                      color: #333;
+                      margin: 0 auto;
+                      font-style: italic;
+                      max-width: 95%;
+                      padding: 0 20px;
+                    "
+                  >
+                    Vercel execution logs showing OpenAI responses and Redis
+                    memory writes
+                  </p>
                 </div>
 
-                <div style="margin-bottom: 60px; max-width: 100%; margin-left: auto; margin-right: auto;">
+                <div
+                  style="
+                    margin-bottom: 60px;
+                    max-width: 100%;
+                    margin-left: auto;
+                    margin-right: auto;
+                  "
+                >
                   <img
                     src="../images/Automation/pinecode_database with uploaded faq count.png"
                     alt="Pinecone vector database storing business FAQs for RAG retrieval"
                     class="project-image"
-                    style="width: 95%; margin: 0 auto 20px auto; display: block; border-radius: 12px; box-shadow: 0 8px 20px rgba(0,0,0,0.25);"
+                    style="
+                      width: 95%;
+                      margin: 0 auto 20px auto;
+                      display: block;
+                      border-radius: 12px;
+                      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+                    "
                   />
-                  <p style="text-align: center; font-size: 1.1em; color: #333; margin: 0 auto; font-style: italic; max-width: 95%; padding: 0 20px;">Pinecone vector database storing business FAQs for RAG retrieval</p>
+                  <p
+                    style="
+                      text-align: center;
+                      font-size: 1.1em;
+                      color: #333;
+                      margin: 0 auto;
+                      font-style: italic;
+                      max-width: 95%;
+                      padding: 0 20px;
+                    "
+                  >
+                    Pinecone vector database storing business FAQs for RAG
+                    retrieval
+                  </p>
                 </div>
 
-                <div style="margin-bottom: 60px; max-width: 100%; margin-left: auto; margin-right: auto;">
+                <div
+                  style="
+                    margin-bottom: 60px;
+                    max-width: 100%;
+                    margin-left: auto;
+                    margin-right: auto;
+                  "
+                >
                   <img
                     src="../images/Automation/Redis image showing contact info saved.png"
                     alt="Persistent conversation memory stored in Redis (contact details & qualification state)"
                     class="project-image"
-                    style="width: 95%; margin: 0 auto 20px auto; display: block; border-radius: 12px; box-shadow: 0 8px 20px rgba(0,0,0,0.25);"
+                    style="
+                      width: 95%;
+                      margin: 0 auto 20px auto;
+                      display: block;
+                      border-radius: 12px;
+                      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+                    "
                   />
-                  <p style="text-align: center; font-size: 1.1em; color: #333; margin: 0 auto; font-style: italic; max-width: 95%; padding: 0 20px;">Persistent conversation memory stored in Redis (contact details & qualification state)</p>
+                  <p
+                    style="
+                      text-align: center;
+                      font-size: 1.1em;
+                      color: #333;
+                      margin: 0 auto;
+                      font-style: italic;
+                      max-width: 95%;
+                      padding: 0 20px;
+                    "
+                  >
+                    Persistent conversation memory stored in Redis (contact
+                    details & qualification state)
+                  </p>
                 </div>
 
-                <div style="margin-bottom: 60px; max-width: 100%; margin-left: auto; margin-right: auto;">
+                <div
+                  style="
+                    margin-bottom: 60px;
+                    max-width: 100%;
+                    margin-left: auto;
+                    margin-right: auto;
+                  "
+                >
                   <img
                     src="../images/Automation/instagram conco showing smart responses and memory.png"
                     alt="Instagram DM conversation demonstrating memory recall and contextual responses"
                     class="project-image"
-                    style="width: 95%; margin: 0 auto 20px auto; display: block; border-radius: 12px; box-shadow: 0 8px 20px rgba(0,0,0,0.25);"
+                    style="
+                      width: 95%;
+                      margin: 0 auto 20px auto;
+                      display: block;
+                      border-radius: 12px;
+                      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+                    "
                   />
-                  <p style="text-align: center; font-size: 1.1em; color: #333; margin: 0 auto; font-style: italic; max-width: 95%; padding: 0 20px;">Instagram DM conversation demonstrating memory recall and contextual responses</p>
+                  <p
+                    style="
+                      text-align: center;
+                      font-size: 1.1em;
+                      color: #333;
+                      margin: 0 auto;
+                      font-style: italic;
+                      max-width: 95%;
+                      padding: 0 20px;
+                    "
+                  >
+                    Instagram DM conversation demonstrating memory recall and
+                    contextual responses
+                  </p>
                 </div>
 
-                <div style="margin-bottom: 0; max-width: 100%; margin-left: auto; margin-right: auto;">
+                <div
+                  style="
+                    margin-bottom: 0;
+                    max-width: 100%;
+                    margin-left: auto;
+                    margin-right: auto;
+                  "
+                >
                   <img
                     src="../images/Automation/whatsapp ai convo.png"
                     alt="WhatsApp AI conversation handling qualification and sales logic"
                     class="project-image"
-                    style="width: 95%; margin: 0 auto 20px auto; display: block; border-radius: 12px; box-shadow: 0 8px 20px rgba(0,0,0,0.25);"
+                    style="
+                      width: 95%;
+                      margin: 0 auto 20px auto;
+                      display: block;
+                      border-radius: 12px;
+                      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+                    "
                   />
-                  <p style="text-align: center; font-size: 1.1em; color: #333; margin: 0 auto; font-style: italic; max-width: 95%; padding: 0 20px;">WhatsApp AI conversation handling qualification and sales logic</p>
+                  <p
+                    style="
+                      text-align: center;
+                      font-size: 1.1em;
+                      color: #333;
+                      margin: 0 auto;
+                      font-style: italic;
+                      max-width: 95%;
+                      padding: 0 20px;
+                    "
+                  >
+                    WhatsApp AI conversation handling qualification and sales
+                    logic
+                  </p>
                 </div>
               </div>
             </div>
@@ -1529,8 +2190,31 @@
                 <h3>📌 PROJECT 02 — Google Apps Script Task Reminder System</h3>
               </div>
               <div class="project-content">
-                <div style="background: #fff3cd; border: 3px solid #af4c0f; padding: 18px 25px; border-radius: 8px; margin-bottom: 25px; text-align: center;">
-                  <p style="margin: 0; font-weight: 900; color: #2c2416; font-size: 1.1em; letter-spacing: 0.5px;"><strong>Disclaimer: Images can be clicked to open a zoomed view, allowing you to see all actions and interactions clearly.</strong></p>
+                <div
+                  style="
+                    background: #fff3cd;
+                    border: 3px solid #af4c0f;
+                    padding: 18px 25px;
+                    border-radius: 8px;
+                    margin-bottom: 25px;
+                    text-align: center;
+                  "
+                >
+                  <p
+                    style="
+                      margin: 0;
+                      font-weight: 900;
+                      color: #2c2416;
+                      font-size: 1.1em;
+                      letter-spacing: 0.5px;
+                    "
+                  >
+                    <strong
+                      >Disclaimer: Images can be clicked to open a zoomed view,
+                      allowing you to see all actions and interactions
+                      clearly.</strong
+                    >
+                  </p>
                 </div>
                 <p>
                   <strong>What I Built:</strong> Built a custom Google Apps
@@ -1572,8 +2256,31 @@
                 </h3>
               </div>
               <div class="project-content">
-                <div style="background: #fff3cd; border: 3px solid #af4c0f; padding: 18px 25px; border-radius: 8px; margin-bottom: 25px; text-align: center;">
-                  <p style="margin: 0; font-weight: 900; color: #2c2416; font-size: 1.1em; letter-spacing: 0.5px;"><strong>Disclaimer: Images can be clicked to open a zoomed view, allowing you to see all actions and interactions clearly.</strong></p>
+                <div
+                  style="
+                    background: #fff3cd;
+                    border: 3px solid #af4c0f;
+                    padding: 18px 25px;
+                    border-radius: 8px;
+                    margin-bottom: 25px;
+                    text-align: center;
+                  "
+                >
+                  <p
+                    style="
+                      margin: 0;
+                      font-weight: 900;
+                      color: #2c2416;
+                      font-size: 1.1em;
+                      letter-spacing: 0.5px;
+                    "
+                  >
+                    <strong
+                      >Disclaimer: Images can be clicked to open a zoomed view,
+                      allowing you to see all actions and interactions
+                      clearly.</strong
+                    >
+                  </p>
                 </div>
                 <p>
                   <strong>What I Built:</strong> Designed a complete lead
@@ -1611,8 +2318,31 @@
                 </h3>
               </div>
               <div class="project-content">
-                <div style="background: #fff3cd; border: 3px solid #af4c0f; padding: 18px 25px; border-radius: 8px; margin-bottom: 25px; text-align: center;">
-                  <p style="margin: 0; font-weight: 900; color: #2c2416; font-size: 1.1em; letter-spacing: 0.5px;"><strong>Disclaimer: Images can be clicked to open a zoomed view, allowing you to see all actions and interactions clearly.</strong></p>
+                <div
+                  style="
+                    background: #fff3cd;
+                    border: 3px solid #af4c0f;
+                    padding: 18px 25px;
+                    border-radius: 8px;
+                    margin-bottom: 25px;
+                    text-align: center;
+                  "
+                >
+                  <p
+                    style="
+                      margin: 0;
+                      font-weight: 900;
+                      color: #2c2416;
+                      font-size: 1.1em;
+                      letter-spacing: 0.5px;
+                    "
+                  >
+                    <strong
+                      >Disclaimer: Images can be clicked to open a zoomed view,
+                      allowing you to see all actions and interactions
+                      clearly.</strong
+                    >
+                  </p>
                 </div>
                 <p>
                   <strong>What I Built:</strong> Created an automation that
@@ -1649,8 +2379,31 @@
                 </h3>
               </div>
               <div class="project-content">
-                <div style="background: #fff3cd; border: 3px solid #af4c0f; padding: 18px 25px; border-radius: 8px; margin-bottom: 25px; text-align: center;">
-                  <p style="margin: 0; font-weight: 900; color: #2c2416; font-size: 1.1em; letter-spacing: 0.5px;"><strong>Disclaimer: Images can be clicked to open a zoomed view, allowing you to see all actions and interactions clearly.</strong></p>
+                <div
+                  style="
+                    background: #fff3cd;
+                    border: 3px solid #af4c0f;
+                    padding: 18px 25px;
+                    border-radius: 8px;
+                    margin-bottom: 25px;
+                    text-align: center;
+                  "
+                >
+                  <p
+                    style="
+                      margin: 0;
+                      font-weight: 900;
+                      color: #2c2416;
+                      font-size: 1.1em;
+                      letter-spacing: 0.5px;
+                    "
+                  >
+                    <strong
+                      >Disclaimer: Images can be clicked to open a zoomed view,
+                      allowing you to see all actions and interactions
+                      clearly.</strong
+                    >
+                  </p>
                 </div>
                 <p>
                   <strong>What I Built:</strong> Created a multi-step Zapier
@@ -1691,8 +2444,31 @@
                 </h3>
               </div>
               <div class="project-content">
-                <div style="background: #fff3cd; border: 3px solid #af4c0f; padding: 18px 25px; border-radius: 8px; margin-bottom: 25px; text-align: center;">
-                  <p style="margin: 0; font-weight: 900; color: #2c2416; font-size: 1.1em; letter-spacing: 0.5px;"><strong>Disclaimer: Images can be clicked to open a zoomed view, allowing you to see all actions and interactions clearly.</strong></p>
+                <div
+                  style="
+                    background: #fff3cd;
+                    border: 3px solid #af4c0f;
+                    padding: 18px 25px;
+                    border-radius: 8px;
+                    margin-bottom: 25px;
+                    text-align: center;
+                  "
+                >
+                  <p
+                    style="
+                      margin: 0;
+                      font-weight: 900;
+                      color: #2c2416;
+                      font-size: 1.1em;
+                      letter-spacing: 0.5px;
+                    "
+                  >
+                    <strong
+                      >Disclaimer: Images can be clicked to open a zoomed view,
+                      allowing you to see all actions and interactions
+                      clearly.</strong
+                    >
+                  </p>
                 </div>
                 <p>
                   <strong>What I Built:</strong> Built a fully functional CRM in
@@ -1757,8 +2533,31 @@
                 </h3>
               </div>
               <div class="project-content">
-                <div style="background: #fff3cd; border: 3px solid #af4c0f; padding: 18px 25px; border-radius: 8px; margin-bottom: 25px; text-align: center;">
-                  <p style="margin: 0; font-weight: 900; color: #2c2416; font-size: 1.1em; letter-spacing: 0.5px;"><strong>Disclaimer: Images can be clicked to open a zoomed view, allowing you to see all actions and interactions clearly.</strong></p>
+                <div
+                  style="
+                    background: #fff3cd;
+                    border: 3px solid #af4c0f;
+                    padding: 18px 25px;
+                    border-radius: 8px;
+                    margin-bottom: 25px;
+                    text-align: center;
+                  "
+                >
+                  <p
+                    style="
+                      margin: 0;
+                      font-weight: 900;
+                      color: #2c2416;
+                      font-size: 1.1em;
+                      letter-spacing: 0.5px;
+                    "
+                  >
+                    <strong
+                      >Disclaimer: Images can be clicked to open a zoomed view,
+                      allowing you to see all actions and interactions
+                      clearly.</strong
+                    >
+                  </p>
                 </div>
                 <p>
                   <strong>What I Built:</strong> Created a Make.com workflow
@@ -1799,8 +2598,31 @@
                 </h3>
               </div>
               <div class="project-content">
-                <div style="background: #fff3cd; border: 3px solid #af4c0f; padding: 18px 25px; border-radius: 8px; margin-bottom: 25px; text-align: center;">
-                  <p style="margin: 0; font-weight: 900; color: #2c2416; font-size: 1.1em; letter-spacing: 0.5px;"><strong>Disclaimer: Images can be clicked to open a zoomed view, allowing you to see all actions and interactions clearly.</strong></p>
+                <div
+                  style="
+                    background: #fff3cd;
+                    border: 3px solid #af4c0f;
+                    padding: 18px 25px;
+                    border-radius: 8px;
+                    margin-bottom: 25px;
+                    text-align: center;
+                  "
+                >
+                  <p
+                    style="
+                      margin: 0;
+                      font-weight: 900;
+                      color: #2c2416;
+                      font-size: 1.1em;
+                      letter-spacing: 0.5px;
+                    "
+                  >
+                    <strong
+                      >Disclaimer: Images can be clicked to open a zoomed view,
+                      allowing you to see all actions and interactions
+                      clearly.</strong
+                    >
+                  </p>
                 </div>
                 <p>
                   <strong>What I Built:</strong> Built an advanced n8n
@@ -1870,8 +2692,31 @@
                 </h3>
               </div>
               <div class="project-content">
-                <div style="background: #fff3cd; border: 3px solid #af4c0f; padding: 18px 25px; border-radius: 8px; margin-bottom: 25px; text-align: center;">
-                  <p style="margin: 0; font-weight: 900; color: #2c2416; font-size: 1.1em; letter-spacing: 0.5px;"><strong>Disclaimer: Images can be clicked to open a zoomed view, allowing you to see all actions and interactions clearly.</strong></p>
+                <div
+                  style="
+                    background: #fff3cd;
+                    border: 3px solid #af4c0f;
+                    padding: 18px 25px;
+                    border-radius: 8px;
+                    margin-bottom: 25px;
+                    text-align: center;
+                  "
+                >
+                  <p
+                    style="
+                      margin: 0;
+                      font-weight: 900;
+                      color: #2c2416;
+                      font-size: 1.1em;
+                      letter-spacing: 0.5px;
+                    "
+                  >
+                    <strong
+                      >Disclaimer: Images can be clicked to open a zoomed view,
+                      allowing you to see all actions and interactions
+                      clearly.</strong
+                    >
+                  </p>
                 </div>
                 <p>
                   <strong>What I Built:</strong> Demonstration of API
@@ -1913,8 +2758,31 @@
                 </h3>
               </div>
               <div class="project-content">
-                <div style="background: #fff3cd; border: 3px solid #af4c0f; padding: 18px 25px; border-radius: 8px; margin-bottom: 25px; text-align: center;">
-                  <p style="margin: 0; font-weight: 900; color: #2c2416; font-size: 1.1em; letter-spacing: 0.5px;"><strong>Disclaimer: Images can be clicked to open a zoomed view, allowing you to see all actions and interactions clearly.</strong></p>
+                <div
+                  style="
+                    background: #fff3cd;
+                    border: 3px solid #af4c0f;
+                    padding: 18px 25px;
+                    border-radius: 8px;
+                    margin-bottom: 25px;
+                    text-align: center;
+                  "
+                >
+                  <p
+                    style="
+                      margin: 0;
+                      font-weight: 900;
+                      color: #2c2416;
+                      font-size: 1.1em;
+                      letter-spacing: 0.5px;
+                    "
+                  >
+                    <strong
+                      >Disclaimer: Images can be clicked to open a zoomed view,
+                      allowing you to see all actions and interactions
+                      clearly.</strong
+                    >
+                  </p>
                 </div>
                 <p>
                   <strong>What I Built:</strong> Automated the entire website
@@ -1967,8 +2835,31 @@
                 </h3>
               </div>
               <div class="project-content">
-                <div style="background: #fff3cd; border: 3px solid #af4c0f; padding: 18px 25px; border-radius: 8px; margin-bottom: 25px; text-align: center;">
-                  <p style="margin: 0; font-weight: 900; color: #2c2416; font-size: 1.1em; letter-spacing: 0.5px;"><strong>Disclaimer: Images can be clicked to open a zoomed view, allowing you to see all actions and interactions clearly.</strong></p>
+                <div
+                  style="
+                    background: #fff3cd;
+                    border: 3px solid #af4c0f;
+                    padding: 18px 25px;
+                    border-radius: 8px;
+                    margin-bottom: 25px;
+                    text-align: center;
+                  "
+                >
+                  <p
+                    style="
+                      margin: 0;
+                      font-weight: 900;
+                      color: #2c2416;
+                      font-size: 1.1em;
+                      letter-spacing: 0.5px;
+                    "
+                  >
+                    <strong
+                      >Disclaimer: Images can be clicked to open a zoomed view,
+                      allowing you to see all actions and interactions
+                      clearly.</strong
+                    >
+                  </p>
                 </div>
                 <p>
                   <strong>What I Built:</strong> Designed a conditional WhatsApp
@@ -1999,8 +2890,31 @@
                 </h3>
               </div>
               <div class="project-content">
-                <div style="background: #fff3cd; border: 3px solid #af4c0f; padding: 18px 25px; border-radius: 8px; margin-bottom: 25px; text-align: center;">
-                  <p style="margin: 0; font-weight: 900; color: #2c2416; font-size: 1.1em; letter-spacing: 0.5px;"><strong>Disclaimer: Images can be clicked to open a zoomed view, allowing you to see all actions and interactions clearly.</strong></p>
+                <div
+                  style="
+                    background: #fff3cd;
+                    border: 3px solid #af4c0f;
+                    padding: 18px 25px;
+                    border-radius: 8px;
+                    margin-bottom: 25px;
+                    text-align: center;
+                  "
+                >
+                  <p
+                    style="
+                      margin: 0;
+                      font-weight: 900;
+                      color: #2c2416;
+                      font-size: 1.1em;
+                      letter-spacing: 0.5px;
+                    "
+                  >
+                    <strong
+                      >Disclaimer: Images can be clicked to open a zoomed view,
+                      allowing you to see all actions and interactions
+                      clearly.</strong
+                    >
+                  </p>
                 </div>
                 <p>
                   <strong>What I Built:</strong> Configured backend automation
@@ -2035,8 +2949,31 @@
                 </h3>
               </div>
               <div class="project-content">
-                <div style="background: #fff3cd; border: 3px solid #af4c0f; padding: 18px 25px; border-radius: 8px; margin-bottom: 25px; text-align: center;">
-                  <p style="margin: 0; font-weight: 900; color: #2c2416; font-size: 1.1em; letter-spacing: 0.5px;"><strong>Disclaimer: Images can be clicked to open a zoomed view, allowing you to see all actions and interactions clearly.</strong></p>
+                <div
+                  style="
+                    background: #fff3cd;
+                    border: 3px solid #af4c0f;
+                    padding: 18px 25px;
+                    border-radius: 8px;
+                    margin-bottom: 25px;
+                    text-align: center;
+                  "
+                >
+                  <p
+                    style="
+                      margin: 0;
+                      font-weight: 900;
+                      color: #2c2416;
+                      font-size: 1.1em;
+                      letter-spacing: 0.5px;
+                    "
+                  >
+                    <strong
+                      >Disclaimer: Images can be clicked to open a zoomed view,
+                      allowing you to see all actions and interactions
+                      clearly.</strong
+                    >
+                  </p>
                 </div>
                 <p>
                   <strong>What I Built:</strong> Setup automation that converts
@@ -2173,7 +3110,12 @@
     <!-- Lightbox Modal -->
     <div id="lightbox" class="lightbox">
       <span class="lightbox-close">&times;</span>
-      <img class="lightbox-content" id="lightbox-img" src="" alt="Expanded image" />
+      <img
+        class="lightbox-content"
+        id="lightbox-img"
+        src=""
+        alt="Expanded image"
+      />
     </div>
 
     <script>
@@ -2256,20 +3198,23 @@
         // Intersection Observer to auto-play when section comes into view
         const videoContainer = demoVideo.closest('[style*="padding: 50px"]');
         if (videoContainer) {
-          const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting) {
-                // Section is visible - play video
-                demoVideo.muted = true; // Ensure muted for autoplay
-                demoVideo.play().catch((err) => {
-                  console.log("Autoplay was prevented:", err);
-                });
-              } else {
-                // Section is out of view - pause video
-                demoVideo.pause();
-              }
-            });
-          }, { threshold: 0.5 }); // Trigger when 50% of section is visible
+          const observer = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                  // Section is visible - play video
+                  demoVideo.muted = true; // Ensure muted for autoplay
+                  demoVideo.play().catch((err) => {
+                    console.log("Autoplay was prevented:", err);
+                  });
+                } else {
+                  // Section is out of view - pause video
+                  demoVideo.pause();
+                }
+              });
+            },
+            { threshold: 0.5 }
+          ); // Trigger when 50% of section is visible
 
           observer.observe(videoContainer);
         }
