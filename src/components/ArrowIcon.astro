@@ -1,0 +1,22 @@
+---
+// Drawn arrow so it looks the same everywhere. The ↗ character turns into a
+// blue emoji on iPhones.
+interface Props {
+  class?: string;
+}
+const { class: cls = "" } = Astro.props;
+---
+
+<svg class={`arrow-icon ${cls}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+  <path d="M7 17 17 7M9 7h8v8"></path>
+</svg>
+
+<style>
+  .arrow-icon {
+    display: inline-block;
+    width: 0.85em;
+    height: 0.85em;
+    vertical-align: -0.05em;
+    flex-shrink: 0;
+  }
+</style>

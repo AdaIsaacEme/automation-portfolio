@@ -1,4 +1,5 @@
 ---
+import ArrowIcon from "./ArrowIcon.astro";
 import { nav, person, mailto } from "../data/site";
 const year = new Date().getFullYear();
 ---
@@ -24,8 +25,8 @@ const year = new Date().getFullYear();
       <div>
         <p class="footer__head">Elsewhere</p>
         <ul>
-          <li><a class="link-underline" href={person.upwork} target="_blank" rel="noopener">Upwork ↗</a></li>
-          <li><a class="link-underline" href={person.vaSite} target="_blank" rel="noopener">Virtual Assistant Services ↗</a></li>
+          <li><a class="link-underline" href={person.upwork} target="_blank" rel="noopener">Upwork <ArrowIcon /></a></li>
+          <li><a class="link-underline" href={person.vaSite} target="_blank" rel="noopener">Virtual Assistant Services <ArrowIcon /></a></li>
         </ul>
       </div>
       <div>
