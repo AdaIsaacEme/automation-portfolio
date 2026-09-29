@@ -397,42 +397,50 @@ function architecture() {
   const arch = document.querySelector<HTMLElement>("[data-arch]");
   const staticArch = document.querySelectorAll<HTMLElement>("[data-arch-static]");
 
+  // Each diagram has a wide and a tall (phone) layout. Steps with the same
+  // data-step index in both layouts animate together, so whichever is visible
+  // plays correctly.
   const prep = (scope: Element) => {
-    const steps = [...scope.querySelectorAll<SVGGElement>(".step")];
-    steps.forEach((s) => {
-      const edges = s.querySelectorAll(".edge");
+    const groups = [...scope.querySelectorAll<SVGGElement>(".step")];
+    const count = Math.max(...groups.map((g) => Number(g.dataset.step))) + 1;
+    const steps = Array.from({ length: count }, (_, i) => groups.filter((g) => Number(g.dataset.step) === i));
+    groups.forEach((g) => {
+      const edges = g.querySelectorAll(".edge");
       // Arrowheads only appear once their line has finished drawing.
       edges.forEach((e) => e.setAttribute("marker-end", "none"));
       if (edges.length) gsap.set(edges, { drawSVG: "0%" });
-      gsap.set(s.querySelectorAll("[data-node-box]"), { autoAlpha: 0, scale: 0.7 });
+      gsap.set(g.querySelectorAll("[data-node-box]"), { autoAlpha: 0, scale: 0.7 });
     });
     return steps;
   };
 
-  const build = (steps: SVGGElement[], tl: gsap.core.Timeline) => {
-    steps.forEach((s, i) => {
-      const edges = s.querySelectorAll(".edge");
+  const build = (steps: SVGGElement[][], tl: gsap.core.Timeline) => {
+    steps.forEach((groups, i) => {
+      const edges = groups.flatMap((g) => [...g.querySelectorAll<SVGPathElement>(".edge")]);
+      const nodes = groups.flatMap((g) => [...g.querySelectorAll("[data-node-box]")]);
       tl.addLabel(`s${i}`);
       if (edges.length) {
-        tl.to(edges, { drawSVG: "100%", duration: 0.5, ease: "power1.inOut" }).set(edges, {
-          attr: { "marker-end": "url(#arrow)" },
-        });
+        tl.to(edges, { drawSVG: "100%", duration: 0.5, ease: "power1.inOut" });
+        const drawn = tl.duration();
+        edges.forEach((e) => tl.set(e, { attr: { "marker-end": e.dataset.marker! } }, drawn));
       }
-      tl.to(s.querySelectorAll("[data-node-box]"), { autoAlpha: 1, scale: 1, duration: 0.45, ease: "back.out(2)", stagger: 0.08 }, edges.length ? "-=0.2" : ">");
+      tl.to(nodes, { autoAlpha: 1, scale: 1, duration: 0.45, ease: "back.out(2)", stagger: 0.04 }, edges.length ? "-=0.2" : ">");
     });
     return tl;
   };
 
   const packetLoop = (scope: Element) => {
-    const packet = scope.querySelector<SVGCircleElement>("[data-packet]");
-    if (!packet) return;
-    gsap.set(packet, { opacity: 1 });
-    gsap.to(packet, {
-      motionPath: { path: "M95,330 L1000,330", autoRotate: false },
-      duration: 2.8,
-      ease: "power1.inOut",
-      repeat: -1,
-      repeatDelay: 0.4,
+    scope.querySelectorAll<SVGCircleElement>("[data-packet]").forEach((packet) => {
+      const path = packet.closest("svg")?.dataset.packetPath;
+      if (!path) return;
+      gsap.set(packet, { opacity: 1 });
+      gsap.to(packet, {
+        motionPath: { path, autoRotate: false },
+        duration: 2.8,
+        ease: "power1.inOut",
+        repeat: -1,
+        repeatDelay: 0.4,
+      });
     });
   };
 
@@ -545,7 +553,7 @@ function pointer() {
 
     // Project hover preview that follows the cursor
     const list = document.querySelector<HTMLElement>("[data-project-list]");
-    const preview = document.querySelector<HTMLElement>("[data-preview]");
+    const preview = document.querySelector<HTMLElement>("[data-project-preview]");
     if (list && preview) {
       const imgs = [...preview.querySelectorAll<HTMLElement>("[data-preview-img-index]")];
       const px = gsap.quickTo(preview, "x", { duration: 0.6, ease: "power3" });
@@ -577,11 +585,15 @@ function pointer() {
 function footer() {
   const inner = document.querySelector<HTMLElement>("[data-footer-inner]");
   if (!inner) return;
-  gsap.from(inner, {
-    yPercent: -25,
-    opacity: 0.4,
-    ease: "none",
-    scrollTrigger: { trigger: inner.parentElement, start: "top bottom", end: "bottom bottom", scrub: true },
+  // Small, fixed rise that finishes well before the footer is fully on screen.
+  // (A percentage shift hid the headline on tall phone footers.) Desktop only.
+  gsap.matchMedia().add("(min-width: 900px)", () => {
+    gsap.from(inner, {
+      y: -60,
+      opacity: 0.5,
+      ease: "none",
+      scrollTrigger: { trigger: inner.parentElement, start: "top bottom", end: "top 45%", scrub: true },
+    });
   });
 }
 

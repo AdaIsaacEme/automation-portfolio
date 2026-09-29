@@ -147,4 +147,26 @@ import { shot } from "../lib/images";
     font-weight: 380;
     letter-spacing: -0.01em;
   }
+  /* Phones: smaller chips so more tools fit on screen at once. */
+  @media (max-width: 640px) {
+    .marquee__list {
+      gap: 0.5rem;
+      padding-right: 0.5rem;
+    }
+
+    .tool {
+      gap: 0.5rem;
+      padding: 0.3rem 0.85rem 0.3rem 0.3rem;
+    }
+
+    .tool__logo {
+      width: 34px;
+      height: 34px;
+      padding: 5px;
+    }
+
+    .tool__name {
+      font-size: 0.95rem;
+    }
+  }
 </style>

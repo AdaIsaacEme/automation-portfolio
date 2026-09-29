@@ -1,4 +1,5 @@
 ---
+import ArrowIcon from "./ArrowIcon.astro";
 import { Image } from "astro:assets";
 import { contact, person, mailto } from "../data/site";
 import { me } from "../lib/images";
@@ -58,7 +59,7 @@ const items = [
                 <span class="contact__label">{it.label}</span>
                 {it.href ? (
                   <a class="contact__value link-underline" href={it.href} target={it.ext ? "_blank" : undefined} rel={it.ext ? "noopener" : undefined}>
-                    {it.value}{it.ext ? " ↗" : ""}
+                    {it.value}{it.ext && <> <ArrowIcon /></>}
                   </a>
                 ) : (
                   <span class="contact__value">{it.value}</span>
