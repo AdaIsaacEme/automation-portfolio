@@ -3,77 +3,68 @@ import { Image } from "astro:assets";
 import { person, mailto, about } from "../data/site";
 import { me, shot } from "../lib/images";
 
+// Four tools, two either side of the photo, wired into it.
 const nodes = [
   { name: "GoHighLevel", logo: "ghl logo.png", pos: "n1" },
-  { name: "Make.com", logo: "make logo.jpg", pos: "n2" },
-  { name: "OpenAI", logo: "openapi_logo.png", pos: "n3" },
-  { name: "Zapier", logo: "zapier logo.png", pos: "n4" },
-  { name: "n8n", logo: "n8n logo.png", pos: "n5" },
-  { name: "Slack", logo: "slack logo.png", pos: "n6" },
+  { name: "Zapier", logo: "zapier logo.png", pos: "n2" },
+  { name: "n8n", logo: "n8n logo.png", pos: "n3" },
+  { name: "OpenAI", logo: "openapi_logo.png", pos: "n4" },
 ];
 ---
 
 <section class="hero" data-hero>
-  <div class="hero__stage wrap" data-hero-stage>
-    <p class="label hero__eyebrow" data-hero-fade>
-      <span>{person.title}</span>
-    </p>
+  <div class="hero__grid wrap">
+    <div class="hero__copy">
+      <p class="label hero__eyebrow" data-hero-fade>
+        <span>{person.title}</span>
+      </p>
 
-    <h1 class="hero__title">
-      <span class="sr-only">{person.name} | {person.title}</span>
-      <span class="hero__line hero__line--1" aria-hidden="true" data-hero-line>{person.first}</span>
-      <span class="hero__line hero__line--2" aria-hidden="true" data-hero-line><em>{person.last}</em></span>
-    </h1>
+      <h1 class="hero__title">
+        <span class="sr-only">{person.name} | {person.title}</span>
+        <span class="hero__line" aria-hidden="true" data-hero-line>{person.first}</span>
+        <span class="hero__line hero__line--2" aria-hidden="true" data-hero-line><em>{person.last}</em></span>
+      </h1>
 
-    <svg class="hero__wires" aria-hidden="true" data-wires></svg>
-
-    <figure class="hero__portrait" data-hero-portrait data-anchor>
-      <div class="hero__portrait-inner crop" style="--z:1.82;--x:0.23;--y:0.34">
-        <Image
-          src={me.hero}
-          alt={`Portrait of ${person.name}`}
-          widths={[640, 960, 1400, 2000]}
-          sizes="(min-width: 760px) 46vw, 130vw"
-          loading="eager"
-          fetchpriority="high"
-          class="portrait-grade"
-        />
+      <div class="hero__intro" data-hero-fade>
+        <h2 class="hero__role">{person.role}</h2>
+        <p class="hero__tagline">{person.tagline}</p>
       </div>
-      <figcaption class="hero__badge" aria-hidden="true">
-        <svg viewBox="0 0 120 120" class="hero__badge-ring" data-spin>
-          <defs>
-            <path id="badge-circle" d="M60,60 m-46,0 a46,46 0 1,1 92,0 a46,46 0 1,1 -92,0"></path>
-          </defs>
-          <text>
-            <textPath href="#badge-circle">AUTOMATE ✦ INTEGRATE ✦ SCALE ✦ </textPath>
-          </text>
-        </svg>
-        <span class="hero__badge-core">⚙</span>
-      </figcaption>
-    </figure>
 
-    {
-      nodes.map((n) => (
-        <div class={`hero__node ${n.pos}`} data-node aria-hidden="true">
-          <Image src={shot(n.logo)} alt="" width={96} height={96} class="hero__node-img" />
-          <span class="hero__node-name">{n.name}</span>
-        </div>
-      ))
-    }
-  </div>
-
-  <div class="hero__foot wrap">
-    <div class="hero__intro" data-hero-fade>
-      <h2 class="hero__role">{person.role}</h2>
-      <p class="hero__tagline">{person.tagline}</p>
+      <div class="hero__actions" data-hero-fade>
+        <a class="btn" href={mailto} data-magnetic>
+          Let's Automate Your Business <span class="arrow">→</span>
+        </a>
+        <a class="hero__scroll" href="#about">
+          <span class="hero__scroll-line" aria-hidden="true"></span> Scroll to explore
+        </a>
+      </div>
     </div>
-    <div class="hero__actions" data-hero-fade>
-      <a class="btn" href={mailto} data-magnetic>
-        Let's Automate Your Business <span class="arrow">→</span>
-      </a>
-      <a class="hero__scroll" href="#about">
-        <span class="hero__scroll-line" aria-hidden="true"></span> Scroll to explore
-      </a>
+
+    <div class="hero__visual" data-hero-stage>
+      <svg class="hero__wires" aria-hidden="true" data-wires></svg>
+
+      <figure class="hero__portrait" data-hero-portrait>
+        <div class="hero__portrait-inner crop" style="--z:1.4;--x:0.15;--y:0.25">
+          <Image
+            src={me.hero}
+            alt={`Portrait of ${person.name}`}
+            widths={[640, 960, 1400]}
+            sizes="(min-width: 900px) 40vw, 100vw"
+            loading="eager"
+            fetchpriority="high"
+            class="portrait-grade"
+          />
+        </div>
+      </figure>
+
+      {
+        nodes.map((n) => (
+          <div class={`hero__node ${n.pos}`} data-node aria-hidden="true">
+            <Image src={shot(n.logo)} alt="" width={96} height={96} class="hero__node-img" />
+            <span class="hero__node-name">{n.name}</span>
+          </div>
+        ))
+      }
     </div>
   </div>
 </section>
@@ -100,36 +91,59 @@ const nodes = [
     position: relative;
     min-height: 100svh;
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding-top: calc(var(--header-h) + 1.5rem);
-    padding-bottom: clamp(3.5rem, 6vw, 5rem);
+    align-items: center;
+    padding-top: calc(var(--header-h) + 2rem);
+    padding-bottom: clamp(3rem, 6vw, 5rem);
     overflow: clip;
   }
 
-  .hero__stage {
-    position: relative;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding-block: 1rem 2rem;
+  .hero__grid {
+    display: grid;
+    gap: 3rem;
+    align-items: center;
+  }
+
+  @media (min-width: 900px) {
+    .hero__grid {
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: clamp(2rem, 4vw, 4rem);
+    }
+  }
+
+  /* Phones: photo sits right after the name instead of below everything. */
+  @media (max-width: 899px) {
+    .hero__grid {
+      gap: 1.6rem;
+    }
+
+    .hero__copy {
+      display: contents;
+    }
+
+    .hero__eyebrow { order: 1; }
+    .hero__title { order: 2; }
+    .hero__visual { order: 3; }
+    .hero__intro { order: 4; }
+    .hero__actions { order: 5; }
+
+    .hero__eyebrow,
+    .hero__intro,
+    .hero__actions {
+      margin: 0;
+    }
   }
 
   .hero__eyebrow {
     color: var(--mocha);
-    margin-bottom: 1.2rem;
+    margin-bottom: 1.4rem;
   }
 
   .hero__title {
-    position: relative;
-    z-index: 3;
-    pointer-events: none;
     font-family: var(--f-display);
-    font-size: var(--fs-hero);
+    font-size: clamp(3.4rem, 8.4vw, 9.5rem);
     font-weight: 330;
-    line-height: 0.86;
-    letter-spacing: -0.045em;
+    line-height: 0.9;
+    letter-spacing: -0.04em;
     font-variation-settings: "SOFT" 40, "WONK" 0, "opsz" 144;
     display: flex;
     flex-direction: column;
@@ -140,173 +154,18 @@ const nodes = [
   }
 
   .hero__line--2 {
-    align-self: flex-end;
-  }
-
-  /* Where the surname crosses the photo, multiply keeps it legible (it darkens
-     against the dress) while it stays plum over the cream background. */
-
-  /* A cream halo keeps the surname legible where it crosses the photo and is
-     invisible against the cream background. */
-  .hero__line--2 {
-    text-shadow:
-      0 0 2px var(--cream),
-      0 0 22px rgb(255 248 231 / 0.9),
-      0 0 44px rgb(255 248 231 / 0.6);
+    padding-left: 0.5em;
   }
 
   .hero__line em {
     font-style: italic;
     font-weight: 280;
     color: var(--plum);
-    font-variation-settings: "SOFT" 100, "WONK" 1, "opsz" 144;
+    font-variation-settings: "SOFT" 100, "WONK" 0, "opsz" 144;
   }
 
-  .hero__portrait {
-    position: relative;
-    z-index: 2;
-    width: min(72vw, 360px);
-    aspect-ratio: 3 / 4;
-    margin: 2rem auto 0;
-  }
-
-  .hero__portrait-inner {
-    width: 100%;
-    height: 100%;
-    border-radius: 999px 999px var(--radius) var(--radius);
-    overflow: hidden;
-    background: var(--khaki);
-    box-shadow: 0 30px 60px -20px rgb(40 34 30 / 0.45);
-  }
-
-  .hero__badge {
-    position: absolute;
-    left: -34px;
-    bottom: 12%;
-    width: 112px;
-    height: 112px;
-    border-radius: 50%;
-    background: var(--espresso);
-    color: var(--cream);
-    display: grid;
-    place-items: center;
-  }
-
-  .hero__badge-ring {
-    position: absolute;
-    inset: 0;
-    animation: spin 14s linear infinite;
-  }
-
-  .hero__badge-ring text {
-    font-family: var(--f-label);
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 3px;
-    fill: var(--cream);
-  }
-
-  .hero__badge-core {
-    font-size: 1.6rem;
-    color: var(--lilac);
-    animation: spin 8s linear infinite reverse;
-  }
-
-  @keyframes spin {
-    to {
-      transform: rotate(360deg);
-    }
-  }
-
-  .hero__wires {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-    overflow: visible;
-    pointer-events: none;
-  }
-
-  .hero__wires :global(.wire) {
-    fill: none;
-    stroke: var(--plum);
-    stroke-width: 1.3;
-    stroke-dasharray: 4 7;
-    opacity: 0.55;
-    animation: flow 1.6s linear infinite;
-  }
-
-  .hero__wires :global(.packet) {
-    fill: var(--plum);
-  }
-
-  @keyframes flow {
-    to {
-      stroke-dashoffset: -22;
-    }
-  }
-
-  .hero__node {
-    display: none;
-  }
-
-  @media (min-width: 760px) {
-    .hero__portrait {
-      position: absolute;
-      left: 50%;
-      top: 54%;
-      width: clamp(230px, 24vw, 380px);
-      margin: 0;
-      translate: -50% -50%;
-    }
-
-    .hero__node {
-      position: absolute;
-      z-index: 3;
-      display: flex;
-      align-items: center;
-      gap: 0.55rem;
-      padding: 0.4rem 0.9rem 0.4rem 0.4rem;
-      border-radius: 999px;
-      background: var(--cream);
-      border: 1px solid var(--khaki);
-      box-shadow: 0 12px 30px -12px rgb(40 34 30 / 0.35);
-      font-family: var(--f-label);
-      font-size: 0.72rem;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      white-space: nowrap;
-    }
-
-    .hero__node-img {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      object-fit: contain;
-      background: #fff;
-      padding: 4px;
-    }
-
-    .n1 { left: 64%; top: 12%; }
-    .n2 { left: 80%; top: 26%; }
-    .n3 { left: 71%; top: 38%; }
-    .n4 { left: 6%; top: 60%; }
-    .n5 { left: 20%; top: 74%; }
-    .n6 { left: 4%; top: 86%; }
-  }
-
-  .hero__foot {
-    display: grid;
-    gap: 1.8rem;
-    align-items: end;
-  }
-
-  @media (min-width: 900px) {
-    .hero__foot {
-      grid-template-columns: 1.2fr 1fr;
-    }
+  .hero__intro {
+    margin-top: clamp(1.8rem, 3vw, 2.6rem);
   }
 
   .hero__role {
@@ -321,24 +180,18 @@ const nodes = [
 
   .hero__tagline {
     font-family: var(--f-display);
-    font-size: clamp(1.25rem, 2vw, 1.75rem);
+    font-size: clamp(1.2rem, 1.7vw, 1.6rem);
     font-weight: 350;
-    line-height: 1.3;
-    max-width: 30ch;
+    line-height: 1.35;
+    max-width: 32ch;
   }
 
   .hero__actions {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    justify-content: space-between;
     gap: 1.2rem 2rem;
-  }
-
-  @media (min-width: 900px) {
-    .hero__actions {
-      justify-content: flex-end;
-    }
+    margin-top: 2rem;
   }
 
   .hero__scroll {
@@ -377,15 +230,103 @@ const nodes = [
     }
   }
 
+  /* ── Photo + tool nodes ── */
+  .hero__visual {
+    position: relative;
+    display: grid;
+    place-items: center;
+    padding-inline: clamp(0rem, 5vw, 5.5rem);
+  }
+
+  .hero__portrait {
+    position: relative;
+    z-index: 2;
+    width: min(100%, 420px);
+    aspect-ratio: 3 / 4;
+  }
+
+  .hero__portrait-inner {
+    width: 100%;
+    height: 100%;
+    border-radius: 999px 999px var(--radius) var(--radius);
+    background: var(--khaki);
+    box-shadow: 0 30px 60px -24px rgb(40 34 30 / 0.4);
+  }
+
+  .hero__wires {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    overflow: visible;
+    pointer-events: none;
+  }
+
+  .hero__wires :global(.wire) {
+    fill: none;
+    stroke: var(--plum);
+    stroke-width: 1.2;
+    stroke-dasharray: 3 7;
+    opacity: 0.35;
+    animation: flow 1.8s linear infinite;
+  }
+
+  .hero__wires :global(.packet) {
+    fill: var(--plum);
+  }
+
+  @keyframes flow {
+    to {
+      stroke-dashoffset: -20;
+    }
+  }
+
+  .hero__node {
+    display: none;
+  }
+
+  @media (min-width: 760px) {
+    .hero__node {
+      position: absolute;
+      z-index: 3;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.35rem 0.85rem 0.35rem 0.35rem;
+      border-radius: 999px;
+      background: var(--cream);
+      border: 1px solid var(--khaki);
+      box-shadow: 0 10px 24px -12px rgb(40 34 30 / 0.3);
+      font-family: var(--f-label);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .hero__node-img {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      object-fit: contain;
+      background: #fff;
+      padding: 3px;
+    }
+
+    .n1 { left: 0; top: 16%; }
+    .n2 { right: 0; top: 30%; }
+    .n3 { left: 2%; top: 66%; }
+    .n4 { right: 2%; top: 80%; }
+  }
+
+  /* ── Results strip ── */
   .ribbon {
     position: relative;
     z-index: 4;
     padding-block: 1.1rem;
-    rotate: -2deg;
-    margin-inline: -2vw;
-    margin-block: -1.5rem;
     overflow: hidden;
-    box-shadow: 0 20px 40px -20px rgb(40 34 30 / 0.5);
   }
 
   .ribbon__track {
@@ -404,7 +345,7 @@ const nodes = [
     gap: 1.6rem;
     padding-right: 1.6rem;
     font-family: var(--f-display);
-    font-size: clamp(1.3rem, 2.6vw, 2.2rem);
+    font-size: clamp(1.2rem, 2.2vw, 1.9rem);
     font-weight: 350;
     white-space: nowrap;
   }

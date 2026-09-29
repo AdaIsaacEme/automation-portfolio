@@ -15,8 +15,8 @@ const caseCount = projects.length + 1;
           <Image
             src={me.about}
             alt={`${person.name} on a balcony, looking out over the city`}
-            widths={[400, 600, 900]}
-            sizes="(min-width: 900px) 34vw, 90vw"
+            widths={[600, 901]}
+            sizes="(min-width: 900px) 46vw, 120vw"
             class="portrait-grade"
             data-parallax-inner
           />
@@ -104,17 +104,21 @@ const caseCount = projects.length + 1;
   }
 
   .about__photo {
+    position: relative;
     aspect-ratio: 3 / 4;
     overflow: hidden;
     border-radius: var(--radius-lg);
     background: var(--khaki);
   }
 
+  /* Zoomed ~1.35x towards her while keeping the balcony and palm in view. */
   .about__photo :global(img) {
-    width: 100%;
-    height: 115%;
-    object-fit: cover;
-    object-position: 40% 60%;
+    position: absolute;
+    max-width: none;
+    width: 135%;
+    height: auto;
+    left: -28%;
+    top: -17%;
   }
 
   .about__caption {

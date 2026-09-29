@@ -111,6 +111,7 @@ function heroWires() {
     const packet = document.createElementNS(NS, "circle");
     packet.setAttribute("class", "packet");
     packet.setAttribute("r", "3.5");
+    packet.style.opacity = "0";
     svg.append(path, packet);
     return { node, path, packet, reveal: 0, offset: i * 0.17 };
   });
@@ -166,7 +167,7 @@ function hero() {
   const splits = [...lines].map((l) => SplitText.create(l, { type: "chars", mask: "chars" }));
   const chars = splits.flatMap((s) => s.chars);
 
-  // Masks would clip the surname's halo, so drop the split once the intro is done.
+  // Masks can clip italic overhangs, so drop the split once the intro is done.
   const intro = gsap.timeline({
     paused: true,
     defaults: { ease: "expo.out" },
@@ -174,52 +175,34 @@ function hero() {
   });
   intro
     .set([lines, portrait, nodes, fades, ribbon], { autoAlpha: 1 })
-    .from(chars, { yPercent: 115, rotate: 6, duration: 1.3, stagger: 0.035 })
-    .fromTo(portraitInner, { clipPath: "inset(100% 0% 0% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: 1.4, ease: "expo.inOut" }, 0.1)
-    .from(img, { scale: 1.35, duration: 1.8 }, 0.1)
-    .from(".hero__badge", { scale: 0, rotate: -90, duration: 1.2, ease: "back.out(1.6)" }, 0.8)
-    .from(nodes, { scale: 0, autoAlpha: 0, duration: 0.9, ease: "back.out(1.8)", stagger: 0.08 }, 0.7)
-    .to(wires ?? [], { reveal: 1, duration: 1.2, ease: "power2.inOut", stagger: 0.08 }, 0.9)
-    .from(fades, { y: 30, autoAlpha: 0, duration: 1, stagger: 0.1 }, 0.6)
-    .from(ribbon, { yPercent: 120, rotate: 4, duration: 1.2 }, 0.8);
+    .from(chars, { yPercent: 115, duration: 1.2, stagger: 0.03 })
+    .fromTo(portraitInner, { clipPath: "inset(100% 0% 0% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: 1.4, ease: "expo.inOut" }, 0.15)
+    .from(img, { scale: 1.2, duration: 1.8 }, 0.15)
+    .from(nodes, { scale: 0.6, autoAlpha: 0, duration: 0.8, ease: "back.out(1.6)", stagger: 0.1 }, 0.9)
+    .to(wires ?? [], { reveal: 1, duration: 1.1, ease: "power2.inOut", stagger: 0.1 }, 1.0)
+    .from(fades, { y: 24, autoAlpha: 0, duration: 1, stagger: 0.1 }, 0.5)
+    .from(ribbon, { autoAlpha: 0, duration: 0.8, ease: "power2.out" }, 1.0);
 
-  // Floating nodes
+  // Gentle float on the tool nodes — the photo itself stays still and upright.
   nodes.forEach((n, i) => {
     gsap.to(n, {
-      y: gsap.utils.random(-14, 14),
-      x: gsap.utils.random(-8, 8),
-      rotate: gsap.utils.random(-4, 4),
-      duration: gsap.utils.random(2.4, 3.6),
+      y: gsap.utils.random(-8, 8),
+      duration: gsap.utils.random(2.6, 3.6),
       ease: "sine.inOut",
       yoyo: true,
       repeat: -1,
-      delay: i * 0.2,
+      delay: i * 0.25,
     });
   });
 
-  // Scroll away: name lines drift apart, portrait lifts
+  // Scrolling away: the photo drifts up slightly (no rotation).
   const mm = gsap.matchMedia();
-  mm.add("(min-width: 760px)", () => {
-    const st = { trigger: heroEl, start: "top top", end: "bottom top", scrub: true };
-    gsap.to(lines[0], { xPercent: -12, ease: "none", scrollTrigger: st });
-    gsap.to(lines[1], { xPercent: 10, ease: "none", scrollTrigger: st });
-    gsap.to(portrait, { yPercent: -18, rotate: -3, ease: "none", scrollTrigger: st });
-    gsap.to(".hero__node", { yPercent: -120, ease: "none", stagger: 0.02, scrollTrigger: st });
-  });
-
-  // Mouse: portrait tilts, name nudges
-  mm.add(FINE_POINTER, () => {
-    const rx = gsap.quickTo(portraitInner, "rotationY", { duration: 0.8, ease: "power3" });
-    const ry = gsap.quickTo(portraitInner, "rotationX", { duration: 0.8, ease: "power3" });
-    gsap.set(portraitInner, { transformPerspective: 900 });
-    const move = (e: PointerEvent) => {
-      const x = e.clientX / innerWidth - 0.5;
-      const y = e.clientY / innerHeight - 0.5;
-      rx(x * 12);
-      ry(-y * 10);
-    };
-    heroEl.addEventListener("pointermove", move);
-    return () => heroEl.removeEventListener("pointermove", move);
+  mm.add("(min-width: 900px)", () => {
+    gsap.to(portrait, {
+      yPercent: -8,
+      ease: "none",
+      scrollTrigger: { trigger: heroEl, start: "top top", end: "bottom top", scrub: true },
+    });
   });
 
   return intro;
