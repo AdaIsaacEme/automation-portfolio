@@ -1,0 +1,449 @@
+---
+import { Image } from "astro:assets";
+import Base from "../../layouts/Base.astro";
+import Gallery from "../../components/Gallery.astro";
+import ArchitectureDiagram from "../../components/ArchitectureDiagram.astro";
+import DemoVideo from "../../components/DemoVideo.astro";
+import { flagship, projects, allCaseStudies, zoomNote } from "../../data/projects";
+import { mailto, person } from "../../data/site";
+import { shot } from "../../lib/images";
+
+export function getStaticPaths() {
+  return allCaseStudies.map((c) => ({ params: { slug: c.slug } }));
+}
+
+const { slug } = Astro.params;
+const isFlagship = slug === flagship.slug;
+const project = projects.find((p) => p.slug === slug);
+
+const index = allCaseStudies.findIndex((c) => c.slug === slug);
+const next = allCaseStudies[(index + 1) % allCaseStudies.length];
+const prev = allCaseStudies[(index - 1 + allCaseStudies.length) % allCaseStudies.length];
+
+const title = isFlagship ? flagship.title : project!.title;
+const number = isFlagship ? flagship.number : project!.number;
+const tools = isFlagship ? flagship.tools : project!.tools;
+const shots = isFlagship ? flagship.shots : project!.shots;
+const summary = isFlagship ? flagship.problem : project!.built;
+---
+
+<Base
+  page="case"
+  title={`${title} — ${person.name}`}
+  description={summary.slice(0, 155)}
+>
+  <article class="case">
+    <header class="case__hero wrap">
+      <a class="case__back link-underline" href="/#projects">← All projects</a>
+      <p class="label"><span class="num">{number}</span> {isFlagship ? flagship.label : "Case study"}</p>
+      <h1 class="case__title" data-split>
+        {title}
+        {isFlagship && <em> ({flagship.subtitle})</em>}
+      </h1>
+      <ul class="case__tags" data-fade-up>
+        {tools.map((t) => <li class="chip">{t}</li>)}
+      </ul>
+    </header>
+
+    {
+      isFlagship ? (
+        <>
+          <section class="case__body wrap">
+            <div class="case__cols">
+              <div class="block" data-fade-up>
+                <h2 class="block__title">The Problem</h2>
+                <p>{flagship.problem}</p>
+              </div>
+              <div class="block" data-fade-up>
+                <h2 class="block__title">The Solution</h2>
+                <p>{flagship.solution}</p>
+                <ul class="case__list">
+                  {flagship.architecture.map((a) => (
+                    <li>
+                      <strong>{a.strong}</strong> {a.text}
+                    </li>
+                  ))}
+                </ul>
+                <p>
+                  <strong>Multi-channel deployment:</strong> {flagship.multichannel}
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section class="case__dark on-dark" data-dark>
+            <div class="wrap">
+              <div class="case__diagram" data-arch-static>
+                <ArchitectureDiagram />
+              </div>
+
+              <h2 class="block__title block__title--light">Tech Stack</h2>
+              <ul class="stack-grid">
+                {flagship.stack.map((s) => (
+                  <li class="stack-item" data-fade-up>
+                    <span class="stack-item__logo">
+                      <Image src={shot(s.logo)} alt={s.name} width={120} height={120} />
+                    </span>
+                    <strong>{s.name}</strong>
+                    <span class="muted">{s.role}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <h2 class="block__title block__title--light">Why This Project Matters</h2>
+              <ul class="matters">
+                {flagship.matters.map((m, i) => (
+                  <li data-fade-up>
+                    <span class="matters__num">{String(i + 1).padStart(2, "0")}</span>
+                    <p>
+                      <strong>{m.strong}</strong> {m.text}
+                    </p>
+                  </li>
+                ))}
+              </ul>
+
+              <div class="case__video">
+                <DemoVideo />
+              </div>
+            </div>
+          </section>
+        </>
+      ) : (
+        <section class="case__body wrap">
+          <div class="case__cols">
+            <div class="block" data-fade-up>
+              <h2 class="block__title">What I Built</h2>
+              <p class="case__built">{project!.built}</p>
+              {project!.keyFeatures && (
+                <>
+                  <h2 class="block__title block__title--spaced">Key Features</h2>
+                  <p>{project!.keyFeatures}</p>
+                </>
+              )}
+            </div>
+            <aside class="impact" data-fade-up>
+              <p class="impact__label">Impact</p>
+              <p class="impact__text">{project!.impact}</p>
+            </aside>
+          </div>
+        </section>
+      )
+    }
+
+    <section class="case__gallery wrap">
+      <div class="case__gallery-head">
+        <h2 class="block__title">Screenshots</h2>
+        <p class="note">
+          <strong>Disclaimer:</strong>
+          {zoomNote}
+        </p>
+      </div>
+      <Gallery shots={shots} />
+    </section>
+
+    <nav class="case__nav on-dark" aria-label="More projects" data-dark>
+      <div class="wrap case__nav-inner">
+        <a class="case__prev link-underline" href={`/projects/${prev.slug}`}>← {prev.number} · Previous</a>
+        <a class="case__next" href={`/projects/${next.slug}`} data-cursor="view">
+          <span class="label">Next project · {next.number}</span>
+          <span class="case__next-title">{next.title}</span>
+          <span class="case__next-arrow" aria-hidden="true">→</span>
+        </a>
+        <a class="btn btn--light" href={mailto} data-magnetic>
+          Let's Automate Your Business <span class="arrow">→</span>
+        </a>
+      </div>
+    </nav>
+  </article>
+</Base>
+
+<style>
+  .case__hero {
+    padding-top: calc(var(--header-h) + clamp(3rem, 8vw, 6rem));
+    padding-bottom: clamp(2.5rem, 5vw, 4rem);
+  }
+
+  .case__back {
+    display: block;
+    width: fit-content;
+    margin-bottom: 2.5rem;
+    font-family: var(--f-label);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .case__title {
+    margin-top: 1.2rem;
+    font-family: var(--f-display);
+    font-size: clamp(2.4rem, 6.5vw, 6rem);
+    font-weight: 340;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    max-width: 18ch;
+  }
+
+  .case__title em {
+    font-style: italic;
+    color: var(--plum);
+    font-weight: 300;
+    font-variation-settings: "SOFT" 100, "WONK" 1;
+  }
+
+  .case__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 2rem;
+    color: var(--mocha);
+  }
+
+  .case__body {
+    padding-bottom: clamp(3rem, 6vw, 5rem);
+  }
+
+  .case__cols {
+    display: grid;
+    gap: 2.5rem;
+    padding-top: 2.5rem;
+    border-top: 1px solid var(--espresso);
+  }
+
+  @media (min-width: 900px) {
+    .case__cols {
+      grid-template-columns: 1.3fr 1fr;
+      gap: 5rem;
+    }
+  }
+
+  .block p + p,
+  .block .case__list + p {
+    margin-top: 1rem;
+  }
+
+  .block__title {
+    font-family: var(--f-label);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--plum);
+    margin-bottom: 1rem;
+  }
+
+  .block__title--spaced {
+    margin-top: 2.5rem;
+  }
+
+  .block__title--light {
+    color: var(--lilac);
+    margin-top: clamp(3rem, 6vw, 5rem);
+    margin-bottom: 1.5rem;
+  }
+
+  .case__built {
+    font-family: var(--f-display);
+    font-size: clamp(1.25rem, 2vw, 1.7rem);
+    font-weight: 350;
+    line-height: 1.4;
+  }
+
+  .case__list {
+    display: grid;
+    gap: 0.8rem;
+    margin-top: 1.2rem;
+  }
+
+  .case__list li {
+    padding-left: 1.4rem;
+    position: relative;
+  }
+
+  .case__list li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.65em;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--plum);
+  }
+
+  .impact {
+    align-self: start;
+    padding: clamp(1.8rem, 3vw, 2.6rem);
+    border-radius: var(--radius-lg);
+    background: var(--plum);
+    color: var(--cream);
+  }
+
+  .impact__label {
+    font-family: var(--f-label);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--lilac);
+  }
+
+  .impact__text {
+    margin-top: 1rem;
+    font-family: var(--f-display);
+    font-size: clamp(1.4rem, 2.4vw, 2rem);
+    font-weight: 350;
+    line-height: 1.3;
+  }
+
+  .case__dark {
+    padding-block: clamp(4rem, 8vw, 7rem);
+  }
+
+  .case__diagram {
+    border-radius: var(--radius-lg);
+    background: rgb(255 248 231 / 0.04);
+    border: 1px solid rgb(255 248 231 / 0.1);
+    padding: clamp(0.8rem, 2vw, 1.6rem);
+  }
+
+  .stack-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+  }
+
+  .stack-item {
+    display: grid;
+    justify-items: center;
+    gap: 0.3rem;
+    padding: 1.5rem 1rem;
+    border-radius: var(--radius);
+    background: rgb(255 248 231 / 0.05);
+    border: 1px solid rgb(255 248 231 / 0.1);
+    text-align: center;
+  }
+
+  .stack-item__logo {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: #fff;
+    padding: 10px;
+    margin-bottom: 0.6rem;
+  }
+
+  .stack-item__logo :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .stack-item .muted {
+    font-size: 0.85rem;
+  }
+
+  .matters {
+    display: grid;
+    gap: 1rem;
+  }
+
+  @media (min-width: 800px) {
+    .matters {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .matters li {
+    display: flex;
+    gap: 1rem;
+    padding: 1.3rem 1.5rem;
+    border-radius: var(--radius);
+    background: rgb(205 187 221 / 0.08);
+    color: var(--cloud);
+  }
+
+  .matters strong {
+    color: var(--cream);
+  }
+
+  .matters__num {
+    font-family: var(--f-label);
+    font-weight: 700;
+    color: var(--lilac);
+  }
+
+  .case__video {
+    margin-top: clamp(4rem, 8vw, 6rem);
+  }
+
+  .case__gallery {
+    padding-block: clamp(4rem, 8vw, 7rem);
+  }
+
+  .case__gallery-head {
+    display: grid;
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .note {
+    padding: 1rem 1.3rem;
+    border-radius: 14px;
+    border-left: 4px solid var(--plum);
+    background: var(--coconut);
+    font-size: 0.95rem;
+    max-width: 760px;
+  }
+
+  .case__nav {
+    padding-block: clamp(4rem, 8vw, 6rem);
+  }
+
+  .case__nav-inner {
+    display: grid;
+    gap: 2.5rem;
+    justify-items: start;
+  }
+
+  .case__prev {
+    font-family: var(--f-label);
+    font-size: 0.8rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--cloud);
+  }
+
+  .case__next {
+    display: grid;
+    gap: 1rem;
+    width: 100%;
+    padding-block: 2rem;
+    border-block: 1px solid rgb(255 248 231 / 0.15);
+  }
+
+  .case__next-title {
+    font-family: var(--f-display);
+    font-size: clamp(2rem, 5.5vw, 5rem);
+    font-weight: 320;
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    max-width: 20ch;
+    transition: color 0.4s;
+  }
+
+  .case__next:hover .case__next-title {
+    color: var(--lilac);
+    font-style: italic;
+  }
+
+  .case__next-arrow {
+    font-size: 2.5rem;
+    color: var(--lilac);
+    transition: transform 0.5s var(--ease);
+  }
+
+  .case__next:hover .case__next-arrow {
+    transform: translateX(16px);
+  }
+</style>

@@ -1,0 +1,119 @@
+---
+import { nav, person, mailto } from "../data/site";
+const year = new Date().getFullYear();
+---
+
+<footer class="footer on-dark" data-dark>
+  <div class="wrap footer__inner" data-footer-inner>
+    <div class="footer__top">
+      <p class="footer__big">
+        Stop doing it <em>by hand.</em>
+      </p>
+      <a class="btn btn--light" href={mailto} data-magnetic>
+        Let's Automate Your Business <span class="arrow">→</span>
+      </a>
+    </div>
+
+    <div class="footer__cols">
+      <div>
+        <p class="footer__head">Navigate</p>
+        <ul>
+          {nav.map((n) => <li><a class="link-underline" href={n.href}>{n.label}</a></li>)}
+        </ul>
+      </div>
+      <div>
+        <p class="footer__head">Elsewhere</p>
+        <ul>
+          <li><a class="link-underline" href={person.upwork} target="_blank" rel="noopener">Upwork ↗</a></li>
+          <li><a class="link-underline" href={person.vaSite} target="_blank" rel="noopener">Virtual Assistant Services ↗</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer__head">Contact</p>
+        <ul>
+          <li><a class="link-underline" href={mailto}>{person.email}</a></li>
+          <li><a class="link-underline" href={`tel:${person.phone}`}>{person.phone}</a></li>
+          <li>{person.location}</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <p>© {year} {person.name}</p>
+      <p>{person.title}</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    position: relative;
+    overflow: clip;
+    background: #1c1815;
+  }
+
+  .footer__inner {
+    padding-block: clamp(4rem, 8vw, 7rem) 2rem;
+  }
+
+  .footer__top {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 2rem;
+    padding-bottom: clamp(3rem, 6vw, 5rem);
+    border-bottom: 1px solid rgb(255 248 231 / 0.12);
+  }
+
+  .footer__big {
+    font-family: var(--f-display);
+    font-size: clamp(2.6rem, 7vw, 6.5rem);
+    font-weight: 320;
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    max-width: 12ch;
+  }
+
+  .footer__big em {
+    color: var(--lilac);
+    font-variation-settings: "SOFT" 100, "WONK" 1;
+  }
+
+  .footer__cols {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    padding-block: 3rem;
+    color: var(--cloud);
+  }
+
+  .footer__cols ul {
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  .footer__cols a {
+    color: var(--cream);
+  }
+
+  .footer__head {
+    font-family: var(--f-label);
+    font-size: 0.75rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--lilac);
+    margin-bottom: 1rem;
+  }
+
+  .footer__bottom {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgb(255 248 231 / 0.12);
+    font-size: 0.85rem;
+    color: var(--cloud);
+  }
+</style>

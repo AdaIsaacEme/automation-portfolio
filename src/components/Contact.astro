@@ -1,0 +1,232 @@
+---
+import { Image } from "astro:assets";
+import { contact, person, mailto } from "../data/site";
+import { me } from "../lib/images";
+
+const items = [
+  { icon: "📍", label: "Location", value: person.location.toUpperCase() },
+  { icon: "📞", label: "Phone", value: person.phone, href: `tel:${person.phone}` },
+  { icon: "✉️", label: "Email", value: person.email, href: mailto },
+  { icon: "💼", label: "Upwork", value: "Upwork Profile", href: person.upwork, ext: true },
+  { icon: "🌐", label: "Virtual Assistant Services", value: "VA Portfolio Website", href: person.vaSite, ext: true },
+];
+---
+
+<section id="contact" class="contact on-dark" data-section data-dark>
+  <div class="contact__marquee" aria-hidden="true">
+    <div class="contact__track" data-marquee data-speed="-0.8" data-velocity>
+      {
+        [0, 1].map(() => (
+          <p class="contact__big">
+            Let's automate your business <span>✦</span> Let's automate your business <span>✦</span>
+          </p>
+        ))
+      }
+    </div>
+  </div>
+
+  <div class="wrap contact__grid section">
+    <figure class="contact__photo crop" style="--z:1.6;--x:0.21;--y:0.33" data-clip-reveal>
+      <Image
+        src={me.contact}
+        alt={`${person.name} smiling with hands on hips`}
+        widths={[640, 810]}
+        sizes="(min-width: 900px) 48vw, 128vw"
+        class="portrait-grade"
+        data-parallax-inner
+      />
+      <span class="contact__sticker" data-float aria-hidden="true">Hi! 👋🏾</span>
+    </figure>
+
+    <div class="contact__body">
+      <p class="label"><span class="num">06</span> Contact</p>
+      <h2 class="h2" data-split>Get in <em>touch</em></h2>
+      <p class="contact__text">{contact.text}</p>
+
+      <ul class="contact__list">
+        {
+          items.map((it) => (
+            <li class="contact__item" data-fade-up>
+              <span class="contact__icon" aria-hidden="true">{it.icon}</span>
+              <span class="contact__meta">
+                <span class="contact__label">{it.label}</span>
+                {it.href ? (
+                  <a class="contact__value link-underline" href={it.href} target={it.ext ? "_blank" : undefined} rel={it.ext ? "noopener" : undefined}>
+                    {it.value}{it.ext ? " ↗" : ""}
+                  </a>
+                ) : (
+                  <span class="contact__value">{it.value}</span>
+                )}
+              </span>
+            </li>
+          ))
+        }
+      </ul>
+
+      <a class="contact__orb" href={mailto} data-magnetic data-magnetic-strength="0.5">
+        <span>Email<br />me</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .contact {
+    overflow: clip;
+    padding-top: clamp(3rem, 6vw, 5rem);
+  }
+
+  .contact__marquee {
+    overflow: hidden;
+    border-block: 1px solid rgb(255 248 231 / 0.12);
+    padding-block: 1rem;
+  }
+
+  .contact__track {
+    display: flex;
+    width: max-content;
+  }
+
+  .contact__big {
+    flex-shrink: 0;
+    padding-right: 0.3em;
+    font-family: var(--f-display);
+    font-size: clamp(3.5rem, 11vw, 10rem);
+    font-weight: 300;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    white-space: nowrap;
+    font-style: italic;
+    font-variation-settings: "SOFT" 100, "WONK" 1, "opsz" 144;
+  }
+
+  .contact__big span {
+    color: var(--lilac);
+    font-style: normal;
+    font-size: 0.5em;
+    vertical-align: middle;
+    margin-inline: 0.2em;
+  }
+
+  .contact__grid {
+    display: grid;
+    gap: 3rem;
+  }
+
+  @media (min-width: 900px) {
+    .contact__grid {
+      grid-template-columns: 0.8fr 1.2fr;
+      gap: clamp(3rem, 7vw, 7rem);
+      align-items: center;
+    }
+  }
+
+  .contact__photo {
+    position: relative;
+    max-width: 420px;
+    aspect-ratio: 3 / 4;
+    border-radius: 999px 999px var(--radius-lg) var(--radius-lg);
+    overflow: hidden;
+    background: var(--mocha);
+  }
+
+
+  .contact__sticker {
+    position: absolute;
+    right: 8%;
+    top: 14%;
+    padding: 0.6rem 1rem;
+    border-radius: 999px;
+    background: var(--lilac);
+    color: var(--espresso);
+    font-family: var(--f-label);
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    rotate: 8deg;
+  }
+
+  .contact__body {
+    position: relative;
+  }
+
+  .contact__text {
+    margin-top: 1.5rem;
+    max-width: 46ch;
+    font-size: 1.15rem;
+    color: var(--cloud);
+  }
+
+  .contact__list {
+    margin-top: 2.5rem;
+    display: grid;
+    gap: 0.2rem;
+  }
+
+  .contact__item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding-block: 0.9rem;
+    border-bottom: 1px solid rgb(255 248 231 / 0.12);
+  }
+
+  .contact__icon {
+    width: 44px;
+    height: 44px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: rgb(255 248 231 / 0.07);
+    flex-shrink: 0;
+  }
+
+  .contact__meta {
+    display: grid;
+    min-width: 0;
+  }
+
+  .contact__label {
+    font-family: var(--f-label);
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--lilac);
+  }
+
+  .contact__value {
+    font-family: var(--f-display);
+    font-size: clamp(1.1rem, 1.8vw, 1.4rem);
+    justify-self: start;
+    overflow-wrap: anywhere;
+  }
+
+  .contact__orb {
+    position: absolute;
+    right: 0;
+    top: -1rem;
+    width: clamp(110px, 12vw, 150px);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    display: none;
+    place-items: center;
+    background: var(--lilac);
+    color: var(--espresso);
+    font-family: var(--f-label);
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 1.1;
+    transition: background-color 0.3s, color 0.3s;
+  }
+
+  .contact__orb:hover {
+    background: var(--cream);
+  }
+
+  @media (min-width: 1100px) {
+    .contact__orb {
+      display: grid;
+    }
+  }
+</style>

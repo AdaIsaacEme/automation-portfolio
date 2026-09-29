@@ -1,0 +1,140 @@
+---
+import { Image, getImage } from "astro:assets";
+import { shot } from "../lib/images";
+import type { Shot } from "../data/projects";
+
+interface Props {
+  shots: Shot[];
+}
+const { shots } = Astro.props;
+
+const items = await Promise.all(
+  shots.map(async (s) => {
+    const src = shot(s.file);
+    const full = await getImage({ src, width: Math.min(src.width, 2200), format: "webp" });
+    return { ...s, src, full: full.src };
+  }),
+);
+---
+
+<div class="gallery" data-gallery>
+  {
+    items.map((it, i) => (
+      <figure class={`shot ${i === 0 || items.length === 1 ? "shot--wide" : ""}`} data-fade-up>
+        <button
+          class="shot__btn"
+          type="button"
+          data-lightbox-trigger
+          data-full={it.full}
+          data-caption={it.caption}
+          aria-label={`Open larger view: ${it.caption}`}
+        >
+          <Image
+            src={it.src}
+            alt={it.caption}
+            widths={[640, 960, 1400]}
+            sizes={i === 0 ? "(min-width: 1440px) 1340px, 94vw" : "(min-width: 900px) 46vw, 94vw"}
+            loading="lazy"
+          />
+          <span class="shot__zoom" aria-hidden="true">⤢</span>
+        </button>
+        <figcaption class="shot__caption">
+          <span class="shot__num">{String(i + 1).padStart(2, "0")}</span>
+          {it.caption}
+        </figcaption>
+      </figure>
+    ))
+  }
+</div>
+
+<style>
+  .gallery {
+    display: grid;
+    gap: clamp(1.5rem, 3vw, 2.5rem);
+  }
+
+  @media (min-width: 900px) {
+    .gallery {
+      grid-template-columns: 1fr 1fr;
+      align-items: start;
+    }
+
+    .shot--wide {
+      grid-column: 1 / -1;
+    }
+  }
+
+  .shot__btn {
+    position: relative;
+    display: block;
+    width: 100%;
+    padding: clamp(0.6rem, 1.5vw, 1.2rem);
+    border-radius: var(--radius);
+    background: #fff;
+    border: 1px solid var(--khaki);
+    overflow: hidden;
+    cursor: zoom-in;
+    transition:
+      transform 0.6s var(--ease),
+      box-shadow 0.6s var(--ease);
+  }
+
+  .shot__btn :global(img) {
+    width: 100%;
+    border-radius: 10px;
+    transition: transform 0.8s var(--ease);
+  }
+
+  .shot__btn:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 30px 60px -30px rgb(40 34 30 / 0.45);
+  }
+
+  .shot__btn:hover :global(img) {
+    transform: scale(1.02);
+  }
+
+  .shot__zoom {
+    position: absolute;
+    right: 1.2rem;
+    top: 1.2rem;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: var(--espresso);
+    color: var(--cream);
+    font-size: 1.1rem;
+    opacity: 0;
+    transform: scale(0.6);
+    transition:
+      opacity 0.4s,
+      transform 0.4s var(--ease);
+  }
+
+  .shot__btn:hover .shot__zoom,
+  .shot__btn:focus-visible .shot__zoom {
+    opacity: 1;
+    transform: none;
+  }
+
+  .shot__caption {
+    display: flex;
+    gap: 0.8rem;
+    align-items: baseline;
+    margin-top: 0.9rem;
+    font-family: var(--f-display);
+    font-style: italic;
+    font-size: 1.05rem;
+    color: var(--mocha);
+  }
+
+  .shot__num {
+    font-family: var(--f-label);
+    font-style: normal;
+    font-weight: 700;
+    font-size: 0.8rem;
+    color: var(--plum);
+  }
+</style>

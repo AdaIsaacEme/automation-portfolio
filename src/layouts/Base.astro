@@ -1,0 +1,78 @@
+---
+import "../styles/global.css";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import Lightbox from "../components/Lightbox.astro";
+import Chrome from "../components/Chrome.astro";
+import { person } from "../data/site";
+
+interface Props {
+  title?: string;
+  description?: string;
+  page?: "home" | "case";
+}
+
+const {
+  title = `${person.name} — ${person.title}`,
+  description = "Nkechi Emechukwu's automation portfolio showcasing expertise in Zapier, Make.com, n8n, GoHighLevel, API integrations, and workflow automation. Hire a reliable automation specialist today!",
+  page = "home",
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang="en" data-page={page}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="theme-color" content="#28221E" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <script is:inline>
+      // Decide before first paint whether motion runs, so hidden-until-revealed
+      // elements never flash and reduced-motion users see everything at once.
+      (function () {
+        var d = document.documentElement;
+        var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        if (!reduce) d.classList.add("motion");
+        try {
+          if (!reduce && d.dataset.page === "home" && !sessionStorage.getItem("ne-loaded")) {
+            d.classList.add("is-loading");
+          }
+        } catch (e) {}
+        // Safety net: never leave content hidden if scripts fail.
+        setTimeout(function () {
+          if (!d.classList.contains("motion-ready")) {
+            d.classList.remove("motion", "is-loading");
+          }
+        }, 4000);
+      })();
+    </script>
+    <script is:inline>
+      window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+    </script>
+    <script is:inline defer src="/_vercel/insights/script.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <Chrome page={page} />
+    <Header />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+    <Lightbox />
+    <div class="grain" aria-hidden="true"></div>
+    <script>
+      import "../scripts/main";
+    </script>
+  </body>
+</html>
