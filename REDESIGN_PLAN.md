@@ -189,3 +189,15 @@ Guardrails:
 - Fraunces pairings: https://www.typewolf.com/fraunces
 - League Spartan: https://fontpair.co/fonts/google/league-spartan
 - Free Gotham alternatives: https://www.typewolf.com/gotham
+
+## 7. Round 2 — feedback fixes
+
+- [x] H1 Hero photo stays upright: removed the mouse tilt and the scroll rotation
+- [x] H2 Name on the left, photo on the right, no overlap (removes the glow patch)
+- [x] H3 Tool badges cut from 6 to 4 (GoHighLevel, Zapier, n8n, OpenAI), with quieter lines
+- [x] H4 Spinning badge removed
+- [x] H5 Hero photo zoom reduced from 1.8× to 1.4×; on phones the photo now sits right after the name
+- [x] S1 Results strip is straight
+- [x] S2 About photo zoomed in a little (about 1.35×)
+- [x] S3 Contact band: about half the size, two-tone (cream + lilac italic), room for descenders
+- [ ] P1 Decide: keep the cool lavender/plum accent or switch to warmer mauve/mulberry
