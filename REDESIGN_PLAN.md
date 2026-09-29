@@ -40,7 +40,6 @@ Rule: about 60% cream/neutrals, 30% espresso/mocha, 10% purple.
 | Headlines, big statements | **Fraunces** (variable: `opsz`, `SOFT`, `WONK`) | Google Fonts, free |
 | Nav, labels, numbers, buttons | **League Spartan** | Google Fonts, free |
 | Body text | **Hanken Grotesk** (free, close to Gotham/Aptos) | Google Fonts, free |
-| Optional handwritten notes | More Sugar | Check licence: often free for personal use only |
 
 - **Aptos** and **Arial Nova** are Microsoft fonts and are not licensed for web
   embedding. They go in the fallback stack only:
@@ -73,9 +72,28 @@ and every project keeps its full write-up.
 into an X. Items stagger in as large Fraunces links numbered 01–08. Hovering an item
 shows a portrait crop. The menu includes the VA Services ↗ link, email and socials.
 
-**Portraits (4, all portrait orientation):** hero (arch mask), about (clip-path
-reveal), why-me (parallax), contact (closing image). Put them in `src/assets/me/`
-and Astro turns them into AVIF/WebP at build time.
+**Portraits:** saved in `src/assets/me/`. Astro turns them into AVIF/WebP at build time.
+Keep originals in this folder only. Never put them in `public/`, because files there
+skip optimisation.
+
+| File | Photo | Placement | Why | Crop / treatment |
+|---|---|---|---|---|
+| `01-hero-portrait.jpg` | Standing centred, hands behind back, facing camera | **Hero**, arch mask | Symmetrical, calm, direct: the strongest first impression, and it fits a centred arch | Crop from the top of the tree to mid-thigh so the car on the right is cut off. Slow scroll parallax. |
+| `02-about-portrait.jpg` | Patchwork dress on the balcony, looking out | **About**, pinned, clip-path reveal | A story shot. Looking away suits the narrative text. The terracotta pillars match Mocha. | Keep it wide (she is small in frame). Reveal from the left pillar inward. |
+| `03-why-me-portrait.jpg` | Arms crossed, slight smile | **Why Choose Me** | Arms crossed reads as confident and dependable, which is the message of this section | Crop top to just above the hair to remove the razor wire. Tilt parallax. |
+| `04-contact-portrait.jpg` | Big smile, hands on hips | **Contact / CTA** | The warmest, most approachable shot. It makes "let's work together" feel friendly. | Crop to head-to-knee to remove the razor wire. Gentle float animation. |
+
+In the menu overlay, hovering each link shows a small crop of these same four photos,
+so no extra files are needed.
+
+Colour: the magenta dress works with the Dusty Plum accent. The cool blue gates and sky
+get a light warm grade (CSS `filter: saturate(.92) sepia(.06)`) so all four photos sit
+with the browns.
+
+Size: the files are 810×1080 (WhatsApp-compressed). That is enough for the About,
+Why Me and Contact spots, which are about 420px wide. For a sharper hero on large and
+retina screens, swap `01-hero-portrait.jpg` for the phone original (same filename).
+Nothing else needs to change.
 
 ## 4. Motion system
 
@@ -126,10 +144,12 @@ Guardrails:
 ## 6. Task list
 
 ### Phase 0 — Decisions (you)
-- [ ] T0.1 Approve the palette (or pick another purple from §1)
-- [ ] T0.2 Approve fonts: Fraunces / League Spartan / Hanken Grotesk (+ More Sugar?)
-- [ ] T0.3 Upload the 4 portrait photos (at least 1600 px tall, JPG/PNG)
-- [ ] T0.4 Confirm socials/links to add to the menu and footer (LinkedIn, Upwork, Calendly…)
+- [x] T0.1 Palette approved (Dusty Plum + Lilac Mist accent)
+- [x] T0.2 Fonts approved: Fraunces / League Spartan / Hanken Grotesk (More Sugar dropped)
+- [x] T0.3 Portraits saved to `src/assets/me/` and assigned (see §3)
+- [x] T0.4 Links: reuse the existing ones: email `mailto:nkechieme.ada@gmail.com`,
+      Upwork profile, VA Services portfolio (emexhukwu-nkechi-isaac-portfolio.vercel.app)
+- [ ] T0.5 (Optional) Replace the hero photo with the full-resolution original
 
 ### Phase 1 — Project setup
 - [ ] T1.1 Scaffold Astro (static) in the repo and move the current `index.html` to `legacy/`
