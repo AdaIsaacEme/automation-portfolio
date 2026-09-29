@@ -1,0 +1,167 @@
+---
+import { services, mailto } from "../data/site";
+
+const tones = ["cream", "khaki", "lilac", "coconut"];
+const icons = [
+  // workflow
+  `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><circle cx="10" cy="24" r="5"/><circle cx="38" cy="10" r="5"/><circle cx="38" cy="38" r="5"/><path d="M15 24h8c4 0 4-14 10-14M23 24c4 0 4 14 10 14"/></svg>`,
+  // api plug
+  `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8v8M30 8v8M14 16h20v8a10 10 0 0 1-20 0zM24 34v8"/></svg>`,
+  // pipeline
+  `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="8" width="10" height="32" rx="3"/><rect x="19" y="8" width="10" height="22" rx="3"/><rect x="32" y="8" width="10" height="12" rx="3"/></svg>`,
+  // data
+  `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="24" cy="11" rx="15" ry="5"/><path d="M9 11v13c0 3 7 5 15 5s15-2 15-5V11M9 24v13c0 3 7 5 15 5s15-2 15-5V24"/></svg>`,
+];
+---
+
+<section id="services" class="services section on-dark" data-section data-dark>
+  <div class="wrap">
+    <header class="services__head">
+      <div>
+        <p class="label"><span class="num">02</span> Services</p>
+        <h2 class="h2" data-split>What I <em>automate</em> for you</h2>
+      </div>
+      <p class="services__aside muted" data-fade-up>
+        Four ways I take manual work off your plate — from single Zaps to full AI-powered systems.
+      </p>
+    </header>
+
+    <div class="stack" data-stack>
+      {
+        services.map((s, i) => (
+          <article class={`card card--${tones[i]}`} data-stack-card style={`--i:${i}`}>
+            <div class="card__top">
+              <span class="card__num">{String(i + 1).padStart(2, "0")}</span>
+              <span class="card__icon" aria-hidden="true" set:html={icons[i]} />
+            </div>
+            <h3 class="card__title">{s.title}</h3>
+            <ul class="card__list">
+              {s.items.map((item) => (
+                <li>
+                  <span class="card__check" aria-hidden="true">✓</span>
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </article>
+        ))
+      }
+    </div>
+
+    <div class="services__cta">
+      <a class="btn btn--light" href={mailto} data-magnetic>
+        Start Your Automation Journey <span class="arrow">→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .services__head {
+    display: grid;
+    gap: 1.5rem;
+    margin-bottom: clamp(3rem, 6vw, 5rem);
+  }
+
+  @media (min-width: 900px) {
+    .services__head {
+      grid-template-columns: 1.6fr 1fr;
+      align-items: end;
+    }
+  }
+
+  .services__aside {
+    font-size: 1.1rem;
+    max-width: 36ch;
+  }
+
+  .stack {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .card {
+    position: sticky;
+    top: calc(var(--header-h) + 1rem + var(--i) * 22px);
+    min-height: min(62vh, 520px);
+    display: grid;
+    grid-template-rows: auto auto 1fr;
+    gap: 1.5rem;
+    padding: clamp(1.6rem, 4vw, 3.5rem);
+    border-radius: var(--radius-lg);
+    color: var(--espresso);
+    transform-origin: 50% 0;
+    box-shadow: 0 -20px 50px -30px rgb(0 0 0 / 0.6);
+  }
+
+  .card--cream { background: var(--cream); }
+  .card--khaki { background: var(--khaki); }
+  .card--lilac { background: var(--lilac); }
+  .card--coconut { background: var(--coconut); }
+
+  .card__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .card__num {
+    font-family: var(--f-label);
+    font-weight: 700;
+    font-size: clamp(3rem, 8vw, 6rem);
+    line-height: 0.8;
+    color: var(--plum);
+  }
+
+  .card__icon {
+    width: clamp(48px, 6vw, 72px);
+    color: var(--mocha);
+  }
+
+  .card__title {
+    font-family: var(--f-display);
+    font-size: var(--fs-h3);
+    font-weight: 400;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    max-width: 20ch;
+  }
+
+  .card__list {
+    display: grid;
+    gap: 0.2rem 2.5rem;
+    align-content: end;
+  }
+
+  @media (min-width: 720px) {
+    .card__list {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .card__list li {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding-block: 0.75rem;
+    border-bottom: 1px solid rgb(40 34 30 / 0.14);
+    font-weight: 500;
+  }
+
+  .card__check {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    border-radius: 6px;
+    display: grid;
+    place-items: center;
+    background: var(--espresso);
+    color: var(--cream);
+    font-size: 0.75rem;
+  }
+
+  .services__cta {
+    margin-top: clamp(3rem, 6vw, 5rem);
+    text-align: center;
+  }
+</style>

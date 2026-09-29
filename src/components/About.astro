@@ -1,0 +1,224 @@
+---
+import { Image } from "astro:assets";
+import { about, person, toolCount } from "../data/site";
+import { projects } from "../data/projects";
+import { me } from "../lib/images";
+
+const caseCount = projects.length + 1;
+---
+
+<section id="about" class="about section" data-section>
+  <div class="about__grid wrap">
+    <div class="about__media">
+      <div class="about__sticky">
+        <figure class="about__photo" data-clip-reveal>
+          <Image
+            src={me.about}
+            alt={`${person.name} on a balcony, looking out over the city`}
+            widths={[400, 600, 900]}
+            sizes="(min-width: 900px) 34vw, 90vw"
+            class="portrait-grade"
+            data-parallax-inner
+          />
+        </figure>
+        <p class="about__caption">
+          <span class="chip">Computer Engineering</span>
+          <span class="chip">📍 {person.location}</span>
+        </p>
+      </div>
+    </div>
+
+    <div class="about__copy">
+      <p class="label"><span class="num">01</span> About me</p>
+      <h2 class="h2" data-split>Systems that <em>keep working.</em></h2>
+
+      <p class="about__intro lead" data-scrub-words>{about.intro}</p>
+
+      <div class="about__body">
+        {about.paragraphs.map((p) => <p data-fade-up>{p}</p>)}
+      </div>
+
+      <div class="about__stats" data-fade-up>
+        <div class="stat">
+          <p class="stat__num"><span data-count="50">50</span>–<span data-count="80">80</span>%</p>
+          <p class="stat__label">time saved on routine tasks</p>
+        </div>
+        <div class="stat">
+          <p class="stat__num"><span data-count={caseCount}>{caseCount}</span></p>
+          <p class="stat__label">case studies below</p>
+        </div>
+        <div class="stat">
+          <p class="stat__num"><span data-count={toolCount}>{toolCount}</span>+</p>
+          <p class="stat__label">tools in my stack</p>
+        </div>
+      </div>
+
+      <div class="about__results">
+        <p class="about__results-title"><strong>The result?</strong></p>
+        <ul class="about__results-list" data-stagger>
+          {
+            about.results.map((r) => (
+              <li>
+                <span class="tick" aria-hidden="true">✔</span> {r}
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <blockquote class="about__approach" data-fade-up>
+        <p>
+          {about.approachLead} <strong>{about.approachStrong}</strong>{about.approachTail}
+        </p>
+      </blockquote>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about {
+    background: var(--coconut);
+    padding-top: clamp(7rem, 14vw, 12rem);
+  }
+
+  .about__grid {
+    display: grid;
+    gap: 3rem;
+  }
+
+  @media (min-width: 900px) {
+    .about__grid {
+      grid-template-columns: 0.85fr 1.15fr;
+      gap: clamp(3rem, 7vw, 7rem);
+      align-items: start;
+    }
+
+    .about__media {
+      align-self: stretch;
+    }
+
+    .about__sticky {
+      position: sticky;
+      top: calc(var(--header-h) + 2rem);
+    }
+  }
+
+  .about__photo {
+    aspect-ratio: 3 / 4;
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+    background: var(--khaki);
+  }
+
+  .about__photo :global(img) {
+    width: 100%;
+    height: 115%;
+    object-fit: cover;
+    object-position: 40% 60%;
+  }
+
+  .about__caption {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    color: var(--mocha);
+  }
+
+  .about__intro {
+    margin-top: 2.5rem;
+  }
+
+  .about__intro :global(.word) {
+    transition: none;
+  }
+
+  .about__body {
+    display: grid;
+    gap: 1.2rem;
+    margin-top: 2rem;
+    color: var(--mocha);
+    max-width: 60ch;
+  }
+
+  .about__stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+    padding-block: 2rem;
+    border-block: 1px solid var(--cloud);
+  }
+
+  .stat__num {
+    font-family: var(--f-label);
+    font-weight: 700;
+    font-size: clamp(2.2rem, 3.6vw, 3.4rem);
+    line-height: 1;
+    white-space: nowrap;
+    color: var(--plum);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .stat__label {
+    margin-top: 0.4rem;
+    font-size: 0.92rem;
+    color: var(--mocha);
+  }
+
+  .about__results {
+    margin-top: 2.5rem;
+  }
+
+  .about__results-title {
+    font-family: var(--f-display);
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .about__results-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+
+  .about__results-list li {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.6rem 1.1rem 0.6rem 0.6rem;
+    border-radius: 999px;
+    background: var(--cream);
+    border: 1px solid var(--khaki);
+    font-weight: 500;
+  }
+
+  .tick {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: var(--plum);
+    color: var(--cream);
+    font-size: 0.75rem;
+  }
+
+  .about__approach {
+    margin-top: 3rem;
+    padding: 2rem 2.2rem;
+    border-radius: var(--radius);
+    background: var(--espresso);
+    color: var(--cream);
+    font-family: var(--f-display);
+    font-size: clamp(1.2rem, 1.8vw, 1.5rem);
+    line-height: 1.45;
+    font-weight: 330;
+  }
+
+  .about__approach strong {
+    font-style: italic;
+    font-weight: 450;
+    color: var(--lilac);
+  }
+</style>

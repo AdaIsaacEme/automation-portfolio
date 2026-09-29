@@ -1,0 +1,213 @@
+---
+import { flagship } from "../data/projects";
+import ArchitectureDiagram from "./ArchitectureDiagram.astro";
+import DemoVideo from "./DemoVideo.astro";
+---
+
+<section class="flagship on-dark" data-dark aria-labelledby="flagship-title">
+  <div class="wrap">
+    <header class="flagship__head">
+      <p class="label"><span class="num">{flagship.number}</span> {flagship.label}</p>
+      <h3 id="flagship-title" class="flagship__title" data-split>
+        {flagship.title} <em>({flagship.subtitle})</em>
+      </h3>
+    </header>
+
+    <div class="flagship__ps">
+      <div class="ps" data-fade-up>
+        <h4 class="ps__title">The Problem</h4>
+        <p>{flagship.problem}</p>
+      </div>
+      <div class="ps" data-fade-up>
+        <h4 class="ps__title">The Solution</h4>
+        <p>{flagship.solution}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="arch" data-arch>
+    <div class="arch__inner wrap">
+      <div class="arch__diagram">
+        <ArchitectureDiagram />
+      </div>
+      <ol class="arch__steps">
+        {
+          flagship.architecture.map((a, i) => (
+            <li class="arch__step" data-arch-step={i}>
+              <span class="arch__step-num">{String(i + 1).padStart(2, "0")}</span>
+              <p>
+                <strong>{a.strong}</strong> {a.text}
+              </p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <p class="flagship__multi" data-fade-up>
+      <strong>Multi-channel deployment:</strong>
+      {flagship.multichannel}
+    </p>
+
+    <DemoVideo />
+
+    <div class="flagship__cta">
+      <a class="btn btn--light" href={`/projects/${flagship.slug}`} data-magnetic>
+        Read the full case study <span class="arrow">→</span>
+      </a>
+      <p class="muted">Tech stack, why it matters & {flagship.shots.length} annotated screenshots</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .flagship {
+    padding-block: clamp(5rem, 10vw, 8rem);
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  }
+
+  .flagship__head {
+    max-width: 1100px;
+  }
+
+  .flagship__title {
+    margin-top: 1.2rem;
+    font-family: var(--f-display);
+    font-size: clamp(2.2rem, 5.5vw, 5rem);
+    font-weight: 350;
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+  }
+
+  .flagship__title em {
+    font-style: italic;
+    font-weight: 300;
+    color: var(--lilac);
+    font-variation-settings: "SOFT" 100, "WONK" 1;
+  }
+
+  .flagship__ps {
+    display: grid;
+    gap: 2rem;
+    margin-top: clamp(2.5rem, 5vw, 4rem);
+  }
+
+  @media (min-width: 900px) {
+    .flagship__ps {
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+    }
+  }
+
+  .ps {
+    padding-top: 1.4rem;
+    border-top: 1px solid rgb(255 248 231 / 0.18);
+    color: var(--cloud);
+  }
+
+  .ps__title {
+    font-family: var(--f-label);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--lilac);
+    margin-bottom: 0.8rem;
+  }
+
+  .arch {
+    margin-top: clamp(3rem, 6vw, 5rem);
+  }
+
+  .arch__inner {
+    display: grid;
+    gap: 2.5rem;
+    align-items: center;
+  }
+
+  @media (min-width: 1000px) {
+    .arch__inner {
+      grid-template-columns: 1.35fr 1fr;
+      min-height: 100svh;
+      padding-block: calc(var(--header-h) + 1rem) 2rem;
+    }
+  }
+
+  .arch__diagram {
+    border-radius: var(--radius-lg);
+    background: rgb(255 248 231 / 0.04);
+    border: 1px solid rgb(255 248 231 / 0.1);
+    padding: clamp(0.8rem, 2vw, 1.6rem);
+  }
+
+  .arch__steps {
+    display: grid;
+    gap: 0.4rem;
+  }
+
+  .arch__step {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1rem;
+    padding: 0.85rem 1rem;
+    border-radius: 16px;
+    color: var(--cloud);
+    font-size: 0.97rem;
+    line-height: 1.5;
+    transition:
+      background-color 0.4s,
+      color 0.4s,
+      opacity 0.4s;
+  }
+
+  :global(html.motion) .arch.is-live .arch__step {
+    opacity: 0.35;
+  }
+
+  :global(html.motion) .arch.is-live .arch__step.is-active,
+  :global(html.motion) .arch.is-live .arch__step.is-done {
+    opacity: 1;
+  }
+
+  :global(.arch__step.is-active) {
+    background: rgb(205 187 221 / 0.12);
+    color: var(--cream);
+  }
+
+  .arch__step strong {
+    color: var(--cream);
+  }
+
+  .arch__step-num {
+    font-family: var(--f-label);
+    font-weight: 700;
+    color: var(--lilac);
+    font-size: 0.85rem;
+    padding-top: 0.2rem;
+  }
+
+  .flagship__multi {
+    margin-block: clamp(3rem, 6vw, 5rem);
+    max-width: 900px;
+    font-family: var(--f-display);
+    font-size: clamp(1.3rem, 2.4vw, 2rem);
+    font-weight: 330;
+    line-height: 1.35;
+  }
+
+  .flagship__multi strong {
+    font-style: italic;
+    color: var(--lilac);
+    font-weight: 400;
+  }
+
+  .flagship__cta {
+    margin-top: clamp(3rem, 6vw, 4rem);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem 1.6rem;
+  }
+</style>

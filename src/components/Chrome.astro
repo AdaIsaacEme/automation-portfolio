@@ -1,0 +1,295 @@
+---
+import { person } from "../data/site";
+interface Props {
+  page: "home" | "case";
+}
+const { page } = Astro.props;
+---
+
+{
+  page === "home" && (
+    <div class="preloader" aria-hidden="true">
+      <div class="preloader__inner">
+        <p class="preloader__name">
+          <span class="preloader__word">{person.first}</span>
+          <span class="preloader__word preloader__word--it">{person.last}</span>
+        </p>
+        <p class="preloader__role">{person.title}</p>
+      </div>
+      <div class="preloader__count">
+        <span class="preloader__num">0</span>
+        <span class="preloader__pct">%</span>
+      </div>
+      <div class="preloader__bar"><span /></div>
+    </div>
+  )
+}
+
+<div class="progress" aria-hidden="true"><span></span></div>
+
+<div class="cursor" aria-hidden="true">
+  <div class="cursor__dot"></div>
+  <div class="cursor__ring"><span class="cursor__text">View</span></div>
+</div>
+
+<button class="to-top" type="button" aria-label="Back to top">
+  <svg viewBox="0 0 56 56" aria-hidden="true">
+    <circle class="to-top__track" cx="28" cy="28" r="26"></circle>
+    <circle class="to-top__ring" cx="28" cy="28" r="26" pathLength="1"></circle>
+  </svg>
+  <span aria-hidden="true">↑</span>
+</button>
+
+<style>
+  .preloader {
+    display: none;
+  }
+
+  :global(html.is-loading) .preloader {
+    position: fixed;
+    inset: 0;
+    z-index: 150;
+    display: grid;
+    place-items: center;
+    background: var(--espresso);
+    color: var(--cream);
+  }
+
+  :global(html.is-loading) body {
+    overflow: hidden;
+  }
+
+  .preloader__inner {
+    text-align: center;
+    padding-inline: var(--gutter);
+  }
+
+  .preloader__name {
+    font-family: var(--f-display);
+    font-size: clamp(2.6rem, 9vw, 8rem);
+    line-height: 1;
+    font-weight: 350;
+    letter-spacing: -0.02em;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0 0.25em;
+  }
+
+  .preloader__word {
+    display: inline-block;
+  }
+
+  .preloader__word--it {
+    font-style: italic;
+    color: var(--lilac);
+    font-variation-settings: "SOFT" 100, "WONK" 1;
+  }
+
+  .preloader__role {
+    margin-top: 1.2rem;
+    font-family: var(--f-label);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    color: var(--cloud);
+  }
+
+  .preloader__count {
+    position: absolute;
+    right: var(--gutter);
+    bottom: calc(var(--gutter) + 8px);
+    font-family: var(--f-label);
+    font-weight: 700;
+    font-size: clamp(4rem, 14vw, 11rem);
+    line-height: 0.8;
+    display: flex;
+    align-items: flex-start;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .preloader__pct {
+    font-size: 0.3em;
+    margin-top: 0.2em;
+    color: var(--lilac);
+  }
+
+  .preloader__bar {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 4px;
+    background: rgb(255 248 231 / 0.1);
+  }
+
+  .preloader__bar span {
+    display: block;
+    height: 100%;
+    background: var(--lilac);
+    transform-origin: left;
+    transform: scaleX(0);
+  }
+
+  .progress {
+    position: fixed;
+    inset: 0 0 auto 0;
+    height: 3px;
+    z-index: 120;
+    pointer-events: none;
+  }
+
+  .progress span {
+    display: block;
+    height: 100%;
+    background: var(--plum);
+    transform-origin: left;
+    transform: scaleX(0);
+  }
+
+  .cursor {
+    display: none;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    :global(html.motion) .cursor {
+      display: block;
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 140;
+    }
+
+    :global(html.motion.has-cursor) body,
+    :global(html.motion.has-cursor) a,
+    :global(html.motion.has-cursor) button {
+      cursor: none;
+    }
+  }
+
+  .cursor__dot,
+  .cursor__ring {
+    position: fixed;
+    top: 0;
+    left: 0;
+    border-radius: 50%;
+    will-change: transform;
+  }
+
+  .cursor__dot {
+    width: 8px;
+    height: 8px;
+    margin: -4px 0 0 -4px;
+    background: var(--plum);
+  }
+
+  .cursor__ring {
+    width: 44px;
+    height: 44px;
+    margin: -22px 0 0 -22px;
+    border: 1.5px solid var(--plum);
+    display: grid;
+    place-items: center;
+    transition:
+      width 0.35s var(--ease),
+      height 0.35s var(--ease),
+      margin 0.35s var(--ease),
+      background-color 0.35s var(--ease),
+      border-color 0.35s var(--ease);
+  }
+
+  .cursor__text {
+    font-family: var(--f-label);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--cream);
+    opacity: 0;
+    transition: opacity 0.25s;
+  }
+
+  :global(.cursor.is-link) .cursor__ring {
+    width: 64px;
+    height: 64px;
+    margin: -32px 0 0 -32px;
+    background: rgb(107 78 113 / 0.12);
+  }
+
+  :global(.cursor.is-view) .cursor__ring {
+    width: 96px;
+    height: 96px;
+    margin: -48px 0 0 -48px;
+    background: var(--plum);
+  }
+
+  :global(.cursor.is-view) .cursor__text {
+    opacity: 1;
+  }
+
+  :global(.cursor.is-view) .cursor__dot {
+    opacity: 0;
+  }
+
+  :global(.cursor.on-dark-area) .cursor__dot {
+    background: var(--lilac);
+  }
+
+  :global(.cursor.on-dark-area) .cursor__ring {
+    border-color: var(--lilac);
+  }
+
+  .to-top {
+    position: fixed;
+    right: clamp(14px, 3vw, 28px);
+    bottom: clamp(14px, 3vw, 28px);
+    z-index: 110;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--espresso);
+    color: var(--cream);
+    display: grid;
+    place-items: center;
+    font-size: 1.2rem;
+    opacity: 0;
+    transform: translateY(20px);
+    pointer-events: none;
+    transition:
+      opacity 0.4s var(--ease),
+      transform 0.4s var(--ease),
+      background-color 0.3s;
+    box-shadow: 0 10px 30px rgb(40 34 30 / 0.25);
+  }
+
+  :global(.to-top.is-visible) {
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+  }
+
+  .to-top:hover {
+    background: var(--plum);
+  }
+
+  .to-top svg {
+    position: absolute;
+    inset: 0;
+    transform: rotate(-90deg);
+  }
+
+  .to-top circle {
+    fill: none;
+    stroke-width: 2;
+  }
+
+  .to-top__track {
+    stroke: rgb(255 248 231 / 0.15);
+  }
+
+  .to-top__ring {
+    stroke: var(--lilac);
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+  }
+</style>

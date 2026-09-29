@@ -1,0 +1,450 @@
+---
+import { Image } from "astro:assets";
+import { nav, person, mailto } from "../data/site";
+import { me } from "../lib/images";
+
+const previews = [me.hero, me.about, me.why, me.contact];
+---
+
+<header class="topbar" data-topbar>
+  <div class="topbar__inner">
+    <a class="logo" href="/" aria-label={`${person.name} — home`}>
+      <span class="logo__mark" aria-hidden="true">N<em>e</em></span>
+      <span class="logo__text">{person.name}</span>
+    </a>
+    <p class="topbar__status" aria-hidden="true">
+      <span class="dot"></span> Available for automation projects
+    </p>
+    <div class="topbar__actions">
+      <a class="btn btn--plum topbar__cta" href={mailto} data-magnetic>Let's talk</a>
+      <button
+        class="menu-btn"
+        type="button"
+        aria-expanded="false"
+        aria-controls="site-menu"
+        data-menu-toggle
+      >
+        <span class="menu-btn__label">
+          <span data-label-open>Menu</span>
+          <span data-label-close>Close</span>
+        </span>
+        <span class="menu-btn__icon" aria-hidden="true"><i></i><i></i></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<nav id="site-menu" class="menu on-dark" aria-label="Main" data-menu hidden>
+  <div class="menu__bg" aria-hidden="true"></div>
+  <div class="menu__grid wrap">
+    <ol class="menu__list">
+      {
+        nav.map((item, i) => (
+          <li class="menu__item">
+            <a class="menu__link" href={item.href} data-menu-link data-preview={i % previews.length}>
+              <span class="menu__num">{String(i + 1).padStart(2, "0")}</span>
+              <span class="menu__text">{item.label}</span>
+            </a>
+          </li>
+        ))
+      }
+      <li class="menu__item">
+        <a class="menu__link menu__link--ext" href={person.vaSite} target="_blank" rel="noopener" data-preview="3">
+          <span class="menu__num">↗</span>
+          <span class="menu__text">Virtual Assistant Services</span>
+        </a>
+      </li>
+    </ol>
+
+    <div class="menu__side">
+      <div class="menu__photo" aria-hidden="true">
+        {
+          previews.map((src, i) => (
+            <Image
+              src={src}
+              alt=""
+              widths={[360, 540]}
+              sizes="(min-width: 900px) 24vw, 0px"
+              class={`menu__img portrait-grade ${i === 0 ? "is-active" : ""}`}
+              data-preview-img={i}
+              loading="lazy"
+            />
+          ))
+        }
+      </div>
+      <div class="menu__meta">
+        <p class="label">Say hello</p>
+        <a class="menu__mail link-underline" href={mailto}>{person.email}</a>
+        <ul class="menu__socials">
+          <li><a class="link-underline" href={person.upwork} target="_blank" rel="noopener">Upwork ↗</a></li>
+          <li><a class="link-underline" href={`tel:${person.phone}`}>{person.phone}</a></li>
+          <li><span>📍 {person.location}</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<style>
+  .topbar {
+    position: fixed;
+    inset: 0 0 auto 0;
+    z-index: 130;
+    height: var(--header-h);
+    transition: transform 0.6s var(--ease), background-color 0.4s, color 0.4s;
+  }
+
+  :global(.topbar.is-hidden) {
+    transform: translateY(-110%);
+  }
+
+  :global(.topbar.is-solid) {
+    background: rgb(255 248 231 / 0.82);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    box-shadow: 0 1px 0 rgb(40 34 30 / 0.08);
+  }
+
+  :global(html.menu-open) .topbar {
+    background: transparent;
+    backdrop-filter: none;
+    box-shadow: none;
+    color: var(--cream);
+    transform: none;
+  }
+
+  .topbar__inner {
+    height: 100%;
+    max-width: var(--max);
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
+    font-family: var(--f-label);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+  }
+
+  .logo__mark {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--espresso);
+    color: var(--cream);
+    font-family: var(--f-display);
+    font-size: 1.15rem;
+    text-transform: none;
+    letter-spacing: 0;
+    transition: background-color 0.4s, transform 0.6s var(--ease);
+  }
+
+  .logo__mark em {
+    color: var(--lilac);
+  }
+
+  .logo:hover .logo__mark {
+    transform: rotate(-12deg);
+    background: var(--plum);
+  }
+
+  :global(html.menu-open) .logo__mark {
+    background: var(--cream);
+    color: var(--espresso);
+  }
+
+  :global(html.menu-open) .logo__mark em {
+    color: var(--plum);
+  }
+
+  .topbar__status {
+    display: none;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: var(--f-label);
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--mocha);
+  }
+
+  :global(html.menu-open) .topbar__status {
+    color: var(--cloud);
+  }
+
+  .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #6f9a6a;
+    box-shadow: 0 0 0 0 rgb(111 154 106 / 0.6);
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    70% {
+      box-shadow: 0 0 0 10px rgb(111 154 106 / 0);
+    }
+    100% {
+      box-shadow: 0 0 0 0 rgb(111 154 106 / 0);
+    }
+  }
+
+  @media (min-width: 1000px) {
+    .topbar__status {
+      display: inline-flex;
+    }
+  }
+
+  .topbar__actions {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .topbar__cta {
+    padding: 0.85em 1.4em;
+    font-size: 0.78rem;
+  }
+
+  @media (max-width: 560px) {
+    .topbar__cta,
+    .logo__text {
+      display: none;
+    }
+  }
+
+  :global(html.menu-open) .topbar__cta {
+    --btn-bg: var(--cream);
+    --btn-fg: var(--espresso);
+    --btn-fill: var(--lilac);
+  }
+
+  .menu-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    height: 48px;
+    padding: 0 0.6rem 0 1.2rem;
+    border-radius: 999px;
+    border: 1.5px solid currentColor;
+    font-family: var(--f-label);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .menu-btn__label {
+    display: grid;
+    height: 1.2em;
+    overflow: hidden;
+    line-height: 1.2;
+  }
+
+  .menu-btn__label span {
+    grid-area: 1 / 1;
+    transition: transform 0.5s var(--ease);
+  }
+
+  [data-label-close] {
+    transform: translateY(110%);
+  }
+
+  :global(html.menu-open) [data-label-open] {
+    transform: translateY(-110%);
+  }
+
+  :global(html.menu-open) [data-label-close] {
+    transform: none;
+  }
+
+  .menu-btn__icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: var(--espresso);
+    display: grid;
+    place-content: center;
+    gap: 5px;
+    transition: background-color 0.3s;
+  }
+
+  :global(html.menu-open) .menu-btn__icon {
+    background: var(--lilac);
+  }
+
+  .menu-btn__icon i {
+    display: block;
+    width: 14px;
+    height: 1.5px;
+    background: var(--cream);
+    transition: transform 0.5s var(--ease);
+  }
+
+  :global(html.menu-open) .menu-btn__icon i {
+    background: var(--espresso);
+  }
+
+  :global(html.menu-open) .menu-btn__icon i:first-child {
+    transform: translateY(3.25px) rotate(45deg);
+  }
+
+  :global(html.menu-open) .menu-btn__icon i:last-child {
+    transform: translateY(-3.25px) rotate(-45deg);
+  }
+
+  /* ── Overlay ── */
+  .menu {
+    position: fixed;
+    inset: 0;
+    z-index: 125;
+    display: flex;
+    align-items: center;
+    background: transparent;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+
+  .menu[hidden] {
+    display: none;
+  }
+
+  .menu__bg {
+    position: fixed;
+    inset: 0;
+    background: var(--espresso);
+    z-index: -1;
+  }
+
+  .menu__grid {
+    display: grid;
+    gap: 2.5rem;
+    padding-block: calc(var(--header-h) + 2rem) 2.5rem;
+    align-items: center;
+  }
+
+  @media (min-width: 900px) {
+    .menu__grid {
+      grid-template-columns: 1.5fr 1fr;
+      gap: 4rem;
+    }
+  }
+
+  .menu__item {
+    overflow: clip;
+    border-bottom: 1px solid rgb(255 248 231 / 0.1);
+  }
+
+  .menu__link {
+    display: flex;
+    align-items: baseline;
+    gap: 1.2rem;
+    padding-block: 0.25rem;
+    font-family: var(--f-display);
+    font-size: clamp(2rem, 5.2vw, 4.4rem);
+    font-weight: 330;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    transition: color 0.35s, padding 0.5s var(--ease);
+  }
+
+  .menu__link--ext {
+    font-size: clamp(1.4rem, 3.2vw, 2.4rem);
+    padding-block: 0.9rem;
+  }
+
+  .menu__num {
+    font-family: var(--f-label);
+    font-size: 0.8rem;
+    letter-spacing: 0.14em;
+    color: var(--lilac);
+    min-width: 2.2em;
+  }
+
+  .menu__link:hover,
+  .menu__link:focus-visible {
+    color: var(--lilac);
+    padding-left: 1rem;
+  }
+
+  .menu__link:hover .menu__text {
+    font-style: italic;
+    font-variation-settings: "SOFT" 100, "WONK" 1;
+  }
+
+  .menu__side {
+    display: grid;
+    gap: 2rem;
+  }
+
+  .menu__photo {
+    display: none;
+    position: relative;
+    aspect-ratio: 3 / 4;
+    max-width: 340px;
+    border-radius: 999px 999px var(--radius) var(--radius);
+    overflow: hidden;
+    background: var(--mocha);
+  }
+
+  @media (min-width: 900px) {
+    .menu__photo {
+      display: block;
+    }
+  }
+
+  .menu__img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transform: scale(1.12);
+    transition:
+      opacity 0.6s var(--ease),
+      transform 1.2s var(--ease);
+  }
+
+  :global(.menu__img.is-active) {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .menu__meta {
+    display: grid;
+    gap: 0.8rem;
+    color: var(--cloud);
+  }
+
+  .menu__mail {
+    font-family: var(--f-display);
+    font-size: clamp(1.2rem, 2vw, 1.6rem);
+    color: var(--cream);
+    justify-self: start;
+    word-break: break-all;
+  }
+
+  .menu__socials {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 1.4rem;
+    font-family: var(--f-label);
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+</style>

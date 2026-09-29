@@ -1,0 +1,149 @@
+---
+import { Image } from "astro:assets";
+import { whyMe, mailto, person } from "../data/site";
+import { me } from "../lib/images";
+---
+
+<section id="why-choose" class="why section" data-section>
+  <div class="wrap why__grid">
+    <div class="why__side">
+      <p class="label"><span class="num">05</span> Why Choose Me</p>
+      <h2 class="h2" data-split>Why work <em>with me</em></h2>
+      <figure class="why__photo crop" style="--z:1.7;--x:0.19;--y:0.39" data-clip-reveal>
+        <Image
+          src={me.why}
+          alt={`${person.name} standing with arms crossed, smiling`}
+          widths={[640, 810]}
+          sizes="(min-width: 900px) 48vw, 128vw"
+          class="portrait-grade"
+          data-parallax-inner
+        />
+      </figure>
+    </div>
+
+    <div class="why__cards">
+      {
+        whyMe.map((w, i) => (
+          <article class="why-card" data-tilt data-fade-up>
+            <span class="why-card__num">{String(i + 1).padStart(2, "0")}</span>
+            <h3 class="why-card__title">{w.title}</h3>
+            <p class="why-card__text">{w.text}</p>
+          </article>
+        ))
+      }
+      <div class="why__cta">
+        <a class="btn" href={mailto} data-magnetic>
+          Let's Discuss Your Automation Needs <span class="arrow">→</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .why {
+    background: var(--khaki);
+  }
+
+  .why__grid {
+    display: grid;
+    gap: 3rem;
+  }
+
+  @media (min-width: 900px) {
+    .why__grid {
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: clamp(3rem, 6vw, 6rem);
+      align-items: start;
+    }
+
+    .why__side {
+      position: sticky;
+      top: calc(var(--header-h) + 2rem);
+    }
+  }
+
+  .why__photo {
+    margin-top: 2.5rem;
+    max-width: 440px;
+    aspect-ratio: 3 / 4;
+    overflow: hidden;
+    border-radius: var(--radius-lg) var(--radius-lg) var(--radius-lg) 999px;
+    background: var(--cloud);
+  }
+
+
+  .why__cards {
+    display: grid;
+    gap: 1rem;
+    perspective: 900px;
+  }
+
+  @media (min-width: 640px) {
+    .why__cards {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .why-card {
+    position: relative;
+    padding: 1.8rem;
+    border-radius: var(--radius);
+    background: var(--cream);
+    transform-style: preserve-3d;
+    transition:
+      background-color 0.4s,
+      color 0.4s,
+      box-shadow 0.4s;
+    will-change: transform;
+  }
+
+  .why-card:hover {
+    background: var(--espresso);
+    color: var(--cream);
+    box-shadow: 0 30px 50px -25px rgb(40 34 30 / 0.6);
+  }
+
+  .why-card__num {
+    display: inline-grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--plum);
+    color: var(--cream);
+    font-family: var(--f-label);
+    font-weight: 700;
+    font-size: 0.9rem;
+    transition: background-color 0.4s, color 0.4s;
+  }
+
+  .why-card:hover .why-card__num {
+    background: var(--lilac);
+    color: var(--espresso);
+  }
+
+  .why-card__title {
+    margin-top: 1.4rem;
+    font-family: var(--f-display);
+    font-size: 1.45rem;
+    font-weight: 420;
+    line-height: 1.15;
+  }
+
+  .why-card__text {
+    margin-top: 0.7rem;
+    font-size: 0.98rem;
+    opacity: 0.85;
+  }
+
+  .why__cta {
+    margin-top: 1rem;
+  }
+
+  @media (min-width: 640px) {
+    .why__cta {
+      grid-column: 1 / -1;
+    }
+  }
+</style>

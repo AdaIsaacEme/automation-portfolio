@@ -1,0 +1,266 @@
+---
+import { Image } from "astro:assets";
+import { projects, projectsIntro } from "../data/projects";
+import { mailto } from "../data/site";
+import { shot } from "../lib/images";
+import Flagship from "./Flagship.astro";
+---
+
+<section id="projects" class="projects" data-section>
+  <div class="wrap projects__head section">
+    <p class="label"><span class="num">04</span> Projects & Case Studies</p>
+    <h2 class="h2" data-split>Real workflows, <em>real results</em></h2>
+    <p class="projects__intro muted" data-fade-up>{projectsIntro}</p>
+  </div>
+
+  <Flagship />
+
+  <div class="index section">
+    <div class="wrap">
+      <div class="index__head">
+        <h3 class="index__title" data-split>More automation builds</h3>
+        <p class="muted">{projects.length} projects · hover to preview, click to open</p>
+      </div>
+
+      <ol class="index__list" data-project-list>
+        {
+          projects.map((p, i) => (
+            <li class="row" data-fade-up>
+              <a class="row__link" href={`/projects/${p.slug}`} data-preview-index={i} data-cursor="view">
+                <span class="row__num">{p.number}</span>
+                <span class="row__title">{p.title}</span>
+                <span class="row__tags">
+                  {p.tools.slice(0, 3).map((t) => (
+                    <span class="chip">{t}</span>
+                  ))}
+                </span>
+                <span class="row__arrow" aria-hidden="true">↗</span>
+                <span class="row__thumb" aria-hidden="true">
+                  <Image src={shot(p.shots[0].file)} alt="" widths={[480]} sizes="90vw" loading="lazy" />
+                </span>
+              </a>
+            </li>
+          ))
+        }
+      </ol>
+
+      <div class="index__cta">
+        <a class="btn btn--plum" href={mailto} data-magnetic>
+          Ready to Automate Your Workflows? <span class="arrow">→</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="preview" aria-hidden="true" data-preview>
+    <div class="preview__inner">
+      {
+        projects.map((p, i) => (
+          <Image
+            src={shot(p.shots[0].file)}
+            alt=""
+            widths={[560]}
+            sizes="420px"
+            loading="lazy"
+            class="preview__img"
+            data-preview-img-index={i}
+          />
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .projects__head {
+    padding-bottom: clamp(3rem, 6vw, 5rem);
+  }
+
+  .projects__intro {
+    margin-top: 1.5rem;
+    max-width: 56ch;
+    font-size: 1.1rem;
+  }
+
+  .index {
+    background: var(--cream);
+  }
+
+  .index__head {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .index__title {
+    font-family: var(--f-display);
+    font-size: var(--fs-h3);
+    font-weight: 380;
+  }
+
+  .index__list {
+    border-top: 1px solid var(--espresso);
+  }
+
+  .row {
+    border-bottom: 1px solid var(--cloud);
+  }
+
+  .row__link {
+    position: relative;
+    display: grid;
+    grid-template-columns: 3rem 1fr auto;
+    align-items: center;
+    gap: 0.6rem 1.2rem;
+    padding-block: clamp(1.2rem, 2.4vw, 1.8rem);
+    transition: padding 0.5s var(--ease), color 0.3s;
+  }
+
+  .row__link::before {
+    content: "";
+    position: absolute;
+    inset: 0 calc(var(--gutter) * -1);
+    background: var(--espresso);
+    transform: scaleY(0);
+    transform-origin: bottom;
+    transition: transform 0.5s var(--ease);
+    z-index: -1;
+  }
+
+  .row {
+    position: relative;
+    isolation: isolate;
+  }
+
+  @media (hover: hover) {
+    .row__link:hover {
+      color: var(--cream);
+      padding-inline: 1rem;
+    }
+
+    .row__link:hover::before {
+      transform: scaleY(1);
+      transform-origin: top;
+    }
+
+    .row__link:hover .row__num,
+    .row__link:hover .row__arrow {
+      color: var(--lilac);
+    }
+
+    .row__link:hover .row__arrow {
+      transform: rotate(45deg);
+    }
+  }
+
+  .row__num {
+    font-family: var(--f-label);
+    font-weight: 700;
+    color: var(--plum);
+    transition: color 0.3s;
+  }
+
+  .row__title {
+    font-family: var(--f-display);
+    font-size: clamp(1.2rem, 2.3vw, 2rem);
+    font-weight: 380;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+  }
+
+  .row__tags {
+    display: none;
+    gap: 0.4rem;
+  }
+
+  .row__arrow {
+    font-size: 1.6rem;
+    color: var(--plum);
+    transition:
+      transform 0.5s var(--ease),
+      color 0.3s;
+  }
+
+  .row__thumb {
+    grid-column: 2 / -1;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid var(--khaki);
+    max-height: 180px;
+  }
+
+  .row__thumb :global(img) {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    object-position: top left;
+  }
+
+  @media (min-width: 1000px) {
+    .row__link {
+      grid-template-columns: 4rem 1fr auto auto;
+    }
+
+    .row__tags {
+      display: flex;
+    }
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .row__thumb {
+      display: none;
+    }
+  }
+
+  .index__cta {
+    margin-top: clamp(3rem, 6vw, 4rem);
+    text-align: center;
+  }
+
+  .preview {
+    display: none;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .preview {
+      display: block;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 60;
+      width: 380px;
+      aspect-ratio: 4 / 3;
+      pointer-events: none;
+      opacity: 0;
+      scale: 0.6;
+      translate: -50% -50%;
+    }
+  }
+
+  .preview__inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 18px;
+    overflow: hidden;
+    background: var(--coconut);
+    box-shadow: 0 30px 60px -20px rgb(40 34 30 / 0.5);
+  }
+
+  .preview__img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top left;
+    opacity: 0;
+  }
+
+  :global(.preview__img.is-active) {
+    opacity: 1;
+  }
+</style>

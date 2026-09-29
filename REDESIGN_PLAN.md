@@ -152,30 +152,30 @@ Guardrails:
 - [ ] T0.5 (Optional) Replace the hero photo with the full-resolution original
 
 ### Phase 1 — Project setup
-- [ ] T1.1 Scaffold Astro (static) in the repo and move the current `index.html` to `legacy/`
-- [ ] T1.2 Install `gsap`, `lenis`, `@fontsource-variable/fraunces`, `league-spartan`, `hanken-grotesk`
-- [ ] T1.3 Design tokens: CSS variables for colour, type scale (fluid `clamp()`), spacing, radii
-- [ ] T1.4 Move all copy into content collections (`services.json`, `tools.json`, `projects/*.md`) so nothing is lost
-- [ ] T1.5 Move and optimise the images and video (§5)
-- [ ] T1.6 `vercel.json` / Astro config, Vercel analytics, SEO meta, OG image, sitemap
+- [x] T1.1 Scaffold Astro (static) in the repo and move the current `index.html` to `legacy/`
+- [x] T1.2 Install `gsap`, `lenis`, `@fontsource-variable/fraunces`, `league-spartan`, `hanken-grotesk`
+- [x] T1.3 Design tokens: CSS variables for colour, type scale (fluid `clamp()`), spacing, radii
+- [x] T1.4 Move all copy into content collections (`services.json`, `tools.json`, `projects/*.md`) so nothing is lost
+- [x] T1.5 Move and optimise the images and video (§5)
+- [x] T1.6 `vercel.json` / Astro config, Vercel analytics, SEO meta, OG image, sitemap
 
 ### Phase 2 — Structure (no motion yet)
-- [ ] T2.1 Base layout, top bar, full-screen menu (keyboard and screen-reader accessible)
-- [ ] T2.2 Hero, About, Services, Tools, Flagship, Projects index, Why Me, Contact, Footer
-- [ ] T2.3 Case-study page template plus all 9 projects migrated word-for-word
-- [ ] T2.4 Accessible lightbox for screenshots
-- [ ] T2.5 Responsive pass: 360 / 768 / 1280 / 1920
+- [x] T2.1 Base layout, top bar, full-screen menu (keyboard and screen-reader accessible)
+- [x] T2.2 Hero, About, Services, Tools, Flagship, Projects index, Why Me, Contact, Footer
+- [x] T2.3 Case-study page template plus all 9 projects migrated word-for-word
+- [x] T2.4 Accessible lightbox for screenshots
+- [x] T2.5 Responsive pass: 360 / 768 / 1280 / 1920
 
 ### Phase 3 — Motion
-- [ ] T3.1 GSAP + Lenis bootstrap, `matchMedia`, reduced-motion switch
-- [ ] T3.2 Preloader (M1) and hero intro (M3, M4, M5)
-- [ ] T3.3 Menu open/close timeline and hover portrait
-- [ ] T3.4 About pin, word highlight, counters (M5–M7)
-- [ ] T3.5 Stacking service cards (M8)
-- [ ] T3.6 Velocity marquees (M9)
-- [ ] T3.7 Flagship architecture diagram draw (M4 scrubbed)
-- [ ] T3.8 Project hover preview (M10), Flip lightbox (M11), page transitions (M12)
-- [ ] T3.9 Micro-interactions (M13), progress (M14), footer reveal (M15)
+- [x] T3.1 GSAP + Lenis bootstrap, `matchMedia`, reduced-motion switch
+- [x] T3.2 Preloader (M1) and hero intro (M3, M4, M5)
+- [x] T3.3 Menu open/close timeline and hover portrait
+- [x] T3.4 About pin, word highlight, counters (M5–M7)
+- [x] T3.5 Stacking service cards (M8)
+- [x] T3.6 Velocity marquees (M9)
+- [x] T3.7 Flagship architecture diagram draw (M4 scrubbed)
+- [x] T3.8 Project hover preview (M10), Flip lightbox (M11), page transitions (M12)
+- [x] T3.9 Micro-interactions (M13), progress (M14), footer reveal (M15)
 
 ### Phase 4 — Quality and launch
 - [ ] T4.1 Lighthouse: at least 90 on Performance, Accessibility and SEO, on mobile and desktop
