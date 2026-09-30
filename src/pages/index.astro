@@ -7,14 +7,17 @@ import Tools from "../components/Tools.astro";
 import Projects from "../components/Projects.astro";
 import WhyMe from "../components/WhyMe.astro";
 import Contact from "../components/Contact.astro";
+import Faq from "../components/Faq.astro";
+import { faqSchema } from "../data/seo";
 ---
 
-<Base page="home">
+<Base page="home" schema={[faqSchema]}>
   <Hero />
   <About />
   <Services />
   <Tools />
   <Projects />
   <WhyMe />
+  <Faq />
   <Contact />
 </Base>

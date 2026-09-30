@@ -1,0 +1,9 @@
+---
+interface Props {
+  data: Record<string, unknown>[];
+}
+const { data } = Astro.props;
+const graph = { "@context": "https://schema.org", "@graph": data };
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(graph)} />

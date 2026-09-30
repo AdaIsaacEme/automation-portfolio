@@ -4,21 +4,30 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import Lightbox from "../components/Lightbox.astro";
 import Chrome from "../components/Chrome.astro";
+import JsonLd from "../components/JsonLd.astro";
+import { getImage } from "astro:assets";
 import { person } from "../data/site";
+import { siteSchemas } from "../data/seo";
+import { me } from "../lib/images";
 
 interface Props {
   title?: string;
   description?: string;
   page?: "home" | "case";
+  /** Extra schema.org objects for this page (FAQ, case study, breadcrumbs…). */
+  schema?: Record<string, unknown>[];
 }
 
 const {
-  title = `${person.name} — ${person.title}`,
-  description = "Nkechi Emechukwu's automation portfolio showcasing expertise in Zapier, Make.com, n8n, GoHighLevel, API integrations, and workflow automation. Hire a reliable automation specialist today!",
+  title = `${person.name} — ${person.title} | Zapier, Make, n8n & GoHighLevel`,
+  description = "Nkechi Emechukwu is an automation & workflow systems specialist building Zapier, Make.com, n8n and GoHighLevel automations, API integrations, CRM pipelines and AI workflows. See case studies and hire her remotely.",
   page = "home",
+  schema = [],
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImage = await getImage({ src: me.hero, width: 1200, format: "jpg" });
+const ogImageUrl = new URL(ogImage.src, Astro.site);
 ---
 
 <!doctype html>
@@ -34,7 +43,16 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
+    <meta property="og:site_name" content={`${person.name} — Automation Portfolio`} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:alt" content={`Portrait of ${person.name}`} />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content={ogImageUrl} />
+    <meta name="author" content={person.name} />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="alternate" type="text/plain" title="LLM summary" href="/llms.txt" />
+    <JsonLd data={[...siteSchemas, ...schema]} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <script is:inline>
       // Decide before first paint whether motion runs, so hidden-until-revealed
