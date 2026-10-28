@@ -3,7 +3,7 @@
 import { person } from "./site";
 
 export const SITE_URL = "https://emechukwu-nkechi-automation-portfolio.vercel.app";
-export const VA_SITE_URL = "https://emexhukwu-nkechi-isaac-portfolio.vercel.app";
+export const VA_SITE_URL = "https://emechukwu-nkechi-portfolio.vercel.app";
 export const LINKEDIN = "https://www.linkedin.com/in/nkechi-e-387004328/";
 
 /** One sentence that answers "who is this and what do they do?" */

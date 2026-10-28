@@ -11,7 +11,7 @@ export const person = {
   email: "nkechieme.ada@gmail.com",
   upwork:
     "https://www.upwork.com/freelancers/~01df782906fa3c5051?s=1110580764771602432",
-  vaSite: "https://emexhukwu-nkechi-isaac-portfolio.vercel.app/",
+  vaSite: "https://emechukwu-nkechi-portfolio.vercel.app/",
 };
 
 export const mailto = `mailto:${person.email}`;
