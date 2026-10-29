@@ -148,7 +148,7 @@ Guardrails:
 - [x] T0.2 Fonts approved: Fraunces / League Spartan / Hanken Grotesk (More Sugar dropped)
 - [x] T0.3 Portraits saved to `src/assets/me/` and assigned (see §3)
 - [x] T0.4 Links: reuse the existing ones: email `mailto:nkechieme.ada@gmail.com`,
-      Upwork profile, VA Services portfolio (emexhukwu-nkechi-isaac-portfolio.vercel.app)
+      Upwork profile, VA Services portfolio (emechukwu-nkechi-portfolio.vercel.app)
 - [ ] T0.5 (Optional) Replace the hero photo with the full-resolution original
 
 ### Phase 1 — Project setup
